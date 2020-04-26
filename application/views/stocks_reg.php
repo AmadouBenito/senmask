@@ -32,8 +32,24 @@
                                                         <img alt="image" class="img-circle"
                                                              src="<?php echo base_url() ?>/assets/img/profiles/<?php echo $promoteur->photo ?>">
                                                         <h3 class="m-b-xs"><strong style="color: #f4623a"><?php echo $promoteur->prom_init ?></strong></h3>
-                                                        <h6 style="color: #343a40"><i class="fa fa-map-marked"></i> Localité</h6>
-                                                        <h5 style="color: #f4623a"><?php echo $promoteur->codeqrt ?></h5>
+                                                        <h6 style="color: #343a40"><i class="fa fa-map-marked"></i>Commune/Quartier</h6>
+                                                        <h5 style="color: #f4623a">
+                                                            <?php 
+                                                                foreach ($communes as $commune) { 
+                                                                    if ($commune->codecommune == substr($promoteur->codeqrt, 0, 8)) {
+                                                                        echo $commune->nomcommune;
+                                                                     }?>
+                                                                <?php } 
+                                                            ?>
+                                                             / 
+                                                            <?php 
+                                                                foreach ($quartiers as $quartier) { 
+                                                                    if ($quartier->codequartier == $promoteur->codeqrt) {
+                                                                        echo $quartier->nomquartier;
+                                                                     }?>
+                                                                <?php } 
+                                                            ?>
+                                                        </h5>
                                                         <h6 style="color: #343a40"><i class="fas fa-bookmark"></i> Capacité de production</h6>
                                                         <h5 style="color: #f4623a"><?php echo $promoteur->cap_prod ?></h5>
                                                         <h6 style="color: #343a40"><i class="fas fa-comment-dollar"></i> Prix unitaire</h6>
@@ -53,8 +69,8 @@
                                         <?php } ?>
                                     <?php } ?>
                                     <?php if ($j == 0) { ?>
-                                        <h1>Pas de Distributeur disponible dans ce département. <br>
-                                            Si vous en connaissez un, demandez lui de publier son stock par ici.
+                                        <h1>Aucun distributeur inscrit dans ce département. <br>
+                                            Si vous en connaissez un, veuillez lui demander de publier son stock par ici.
                                         </h1>
                                     <?php } ?>
                                 </div>

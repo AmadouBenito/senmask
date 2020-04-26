@@ -21,6 +21,8 @@ class Welcome extends CI_Controller {
 			'regions' => $this->senmask->getRegionById($code_region),
 			'promoteurs' => $this->senmask->getInfoPromoteur($code_region),
 			'departements' => $this->senmask->getDepartementById($code_region),
+			'communes' => $this->senmask->getCommuneById($code_region),
+			'quartiers' => $this->senmask->getQuartierById($code_region),
 		);
 		$this->load->view('stocks_reg',$data);
 	}
@@ -70,26 +72,26 @@ class Welcome extends CI_Controller {
 			'upload_path' => "./assets/img/profiles",
 			'allowed_types' => "gif|jpg|png|jpeg",
 			'overwrite' => TRUE,
-			'max_size' => "3048000", 
-			'max_height' => "1768",
-			'max_width' => "1724"
+			'max_size' => "6048000", 
+			'max_height' => "2768",
+			'max_width' => "2724"
 		);
 
 		$this->load->library('upload', $config);
 
 		if (!$this->upload->do_upload()) {
 			$error = array('error' => $this->upload->display_errors());
-
-			$this->load->view('erreur', $error);
+			$this->session->set_flashdata('eroor_p', $error);
+			redirect("welcome/publier"); exit;
 		} else {
 			$data = $this->upload->data();
 			$data_user['photo'] = $data['file_name'];
 		}
-		 $insrt = $this->senmask->publier($data_user);
+		$insrt = $this->senmask->publier($data_user);
 		if ($insrt) {
 			$this->session->set_flashdata('message', 'ajout_succed');
 		}
-		redirect('');
+		
 	}
 	
 	public function getNomCommune($codecommune)
@@ -106,5 +108,15 @@ class Welcome extends CI_Controller {
 		}
 		return $nom->nomquartier;
 	}
+
+	/* public function commune_of($coderegion)
+	{
+		return $this->senmask->getCommuneById($coderegion);
+	}
+
+	public function quartier_of($coderegion)
+	{
+		return $this->senmask->getQuartierById($coderegion);
+	} */
 }
 ?>

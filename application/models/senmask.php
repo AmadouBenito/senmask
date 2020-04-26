@@ -13,18 +13,19 @@
         public function publier($data)
         {
             $user = $this->db->get_where('initiative',array("num_tel" => $data['num_tel']));
+            $reg = $this->input->post("region");
             if ($user->num_rows() == '0') {//jamais pub
                 if ($this->db->insert('initiative',$data)) {
                     $this->session->set_flashdata('message', 'insc_succed');
-                    redirect('');
+                    redirect("Welcome/region/$reg");
                 }else{
                     $this->session->set_flashdata('message', 'insc_error');
-                    redirect('Welcome/register');
+                    redirect('Welcome/publier');
                 }
             }else{ // Une fois pub alors undate
                 $this->db->update('initiative',$data);
                 $this->session->set_flashdata('message', 'updated');
-                redirect('');
+                redirect("Welcome/region/$reg");
             }
 
         }
@@ -56,6 +57,22 @@
             $this->db->select('*');
             $this->db->from('departement');
             $this->db->like('codedepartement', $coderegion, 'after');
+            $q = $this->db->get();
+            return $q->result();
+        }
+        public function getCommuneById($coderegion)
+        {   
+            $this->db->select('*');
+            $this->db->from('commune');
+            $this->db->like('codecommune', $coderegion, 'after');
+            $q = $this->db->get();
+            return $q->result();
+        }
+        public function getQuartierById($coderegion)
+        {   
+            $this->db->select('*');
+            $this->db->from('quartier');
+            $this->db->like('codequartier', $coderegion, 'after');
             $q = $this->db->get();
             return $q->result();
         }
