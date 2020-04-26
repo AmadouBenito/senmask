@@ -52,18 +52,23 @@
                                                         </h5>
                                                         <h6 style="color: #343a40"><i class="fas fa-bookmark"></i> Capacité de production</h6>
                                                         <h5 style="color: #f4623a"><?php echo $promoteur->cap_prod ?></h5>
-                                                        <h6 style="color: #343a40"><i class="fas fa-comment-dollar"></i> Prix unitaire</h6>
-                                                        <h5 style="color: #f4623a"><?php echo $promoteur->prix ?></h5>
+                                                        <h6 style="color: #343a40"><i class="fas fa-comment-dollar"></i> Prix unitaire
+                                                            <span style="color: #f4623a"><?php echo $promoteur->prix ?> FCFA</span>
+                                                        </h6><br>
+                                                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal<?php echo $promoteur->num_tel ?>">
+                                                            Voir les masques
+                                                        </button>
+
+
                                                     </a>
                                                     <div class="contact-box-footer">
-                                                        <div class="m-t-xs btn-group">
+                                                        <div class=" btn-group">
                                                             <a class="btn btn-xs btn-white font-weight-bolder ">
                                                                 <i class="fa fa-phone"></i>
                                                                 <?php echo $promoteur->num_tel ?>
                                                             </a>
                                                         </div>
                                                     </div>
-                                                    
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -88,5 +93,10 @@
     </section>
     <?php $this->load->view('footer'); ?>
 </body>
+<?php
+foreach ($promoteurs as $promoteur) {
+    $this->load->view('galery');
+}
+?>
 
 </html>
