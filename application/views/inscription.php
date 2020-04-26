@@ -46,61 +46,27 @@
                         <span class="input-group-text"> <i class="fa fa-map-marked"></i> </span>
                     </div>
                     <select id="departement" name="departement" class="form-control" required>
-                        <option value=""> Sélectionnez votre département</option>
+                        <option value=""> Sélectionnez une region d'abord</option>
 
                     </select>
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                    <script>
-                        $(document).ready(function() {
-                            $('#region').change(function() {
-                                var coderegion = $('#region').val();
-                                console.log(coderegion)
-                                
-                                if (coderegion != '') {
-                                    $.ajax({
-                                        url: "<?php echo base_url(); ?>index.php/welcome/fetch_dep/" + coderegion,
-                                        method: "POST",
-                                        data: {
-                                            coderegion: coderegion
-                                        },
-                                        success: function(data) {
-                                            $('#departement').html(data);
-                                            // $('#city').html('<option value="">Select City</option>');
-                                        }
-                                    });
-                                } else {
-                                    $('#departement').html('<option value="">Select departement</option>');
-                                    //$('#city').html('<option value="">Select City</option>');
-                                }
-                            });
-
-                            /* $('#state').change(function() {
-                                var state_id = $('#state').val();
-                                if (state_id != '') {
-                                    $.ajax({
-                                        url: "<?php echo base_url(); ?>dynamic_dependent/fetch_city",
-                                        method: "POST",
-                                        data: {
-                                            state_id: state_id
-                                        },
-                                        success: function(data) {
-                                            $('#city').html(data);
-                                        }
-                                    });
-                                } else {
-                                    $('#city').html('<option value="">Select City</option>');
-                                }
-                            }); */
-
-                        });
-                    </script>
                 </div>
-                <!--Localité -->
+                <!-- Commune -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-map-marked"></i> </span>
                     </div>
-                    <input name="localite" class="form-control" placeholder="Votre localité (Pas obligatoire)" type="text">
+                    <select id="commune" name="commune" class="form-control" required>
+                        <option value=""> Sélectionnez un département d'abord</option>
+                    </select>
+                </div>
+                <!-- Quartier -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-map-marked"></i> </span>
+                    </div>
+                    <select id="quartier" name="quartier" class="form-control" required>
+                        <option value=""> Sélectionnez une commune d'abord</option>
+                    </select>
                 </div>
                 <!--Capacité de production -->
                 <div class="form-group input-group">
@@ -109,7 +75,7 @@
                     </div>
                     <input required name="capacite" class="form-control" placeholder="Capacité de production de masques" type="number">
                 </div>
-
+                <!-- Prix -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-money-bill"></i> </span>
@@ -134,12 +100,72 @@
             </article>
         </div> <!-- card.// -->
     </div>
-
-
     <!--container end.//-->
     <?php $this->load->view('footer'); ?>
-
-
 </body>
 
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#region').change(function() {
+            var coderegion = $('#region').val();
+            console.log(coderegion)
+
+            if (coderegion != '') {
+                $.ajax({
+                    url: "<?php echo base_url(); ?>index.php/welcome/fetch_dep/" + coderegion,
+                    method: "POST",
+                    data: {
+                        coderegion: coderegion
+                    },
+                    success: function(data) {
+                        $('#departement').html(data);
+                        $('#commune').html('<option value="">Selectionez une commune</option>');
+                    }
+                });
+            } else {
+                $('#departement').html('<option value="">Selectionnez un departement</option>');
+                $('#commune').html('<option value="">Selectionnez une commune</option>');
+            }
+        });
+
+        $('#departement').change(function() {
+            var codedepartement = $('#departement').val();
+            if (codedepartement != '') {
+                $.ajax({
+                    url: "<?php echo base_url(); ?>index.php/welcome/fetch_com/" + codedepartement,
+                    method: "POST",
+                    data: {
+                        codedepartement: codedepartement
+                    },
+                    success: function(data) {
+                        $('#commune').html(data);
+                        $('#quartier').html('<option value="">Selectionnez un quartier/village </option>');
+                    }
+                });
+            } else {
+                $('#commune').html('<option value="">Selectionnez une commune</option>');
+                $('#quartier').html('<option value="">Selectionnez un quartier/village </option>');
+            }
+        });
+
+        $('#commune').change(function() {
+            var codecommune = $('#commune').val();
+            if (codecommune != '') {
+                $.ajax({
+                    url: "<?php echo base_url(); ?>index.php/welcome/fetch_qrt/" + codecommune,
+                    method: "POST",
+                    data: {
+                        codecommune: codecommune
+                    },
+                    success: function(data) {
+                        $('#quartier').html(data);
+                    }
+                });
+            } else {
+                $('#quartier').html('<option value="">Selectionnez un quartier/village </option>');
+            }
+        });
+    });
+</script>

@@ -20,7 +20,7 @@ class Welcome extends CI_Controller {
 		$data = array(
 			'regions' => $this->senmask->getRegionById($code_region),
 			'promoteurs' => $this->senmask->getInfoPromoteur($code_region),
-			'departements' => $this->senmask->getDepartementById($code_region)
+			'departements' => $this->senmask->getDepartementById($code_region),
 		);
 		$this->load->view('stocks_reg',$data);
 	}
@@ -31,18 +31,20 @@ class Welcome extends CI_Controller {
 		}
 	}
 
-	/* public function getCityDepartment()
+	function fetch_com($codedepartement)
 	{
+		if ($codedepartement) {
+			echo $this->senmask->fetch_com($codedepartement);
+		}
+	}
 
-		// POST data 
-		$postData = array(
-			"coderegion" => $this->input->post('numero_tel')
-		);
+	function fetch_qrt($codecommune)
+	{
+		if ($codecommune) {
+			echo $this->senmask->fetch_qrt($codecommune);
+		}
+	}
 
-		// get data 
-		$data = $this->senmask->getCityDepartment($postData);
-		echo json_encode($data);
-	} */
 	public function publier()
 	{	
 		$data = array(
@@ -62,7 +64,7 @@ class Welcome extends CI_Controller {
 			"date" => date($format),
 			"prix" => $this->input->post("prix"),
 			"cap_prod" => $this->input->post("capacite"),
-			"localite" => $this->input->post("localite"),
+			"codeqrt" => $this->input->post("quartier"),
 		);
 		$config = array(
 			'upload_path' => "./assets/img/profiles",
@@ -90,6 +92,19 @@ class Welcome extends CI_Controller {
 		redirect('');
 	}
 	
-
+	public function getNomCommune($codecommune)
+	{
+		foreach ($this->senmask->getNomCommune($codecommune) as $value ) {
+			$nom = $value;
+		}
+		return $nom->nomcommune;
+	}
+	public function getNomQuartier($codequartier)
+	{
+		foreach ($this->senmask->getNomQuartier($codequartier) as $value) {
+			$nom = $value;
+		}
+		return $nom->nomquartier;
+	}
 }
 ?>
