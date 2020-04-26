@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="<?php echo base_url() ?>">
             <img class="logo_img" src="<?php echo base_url(); ?>assets/img/logo_trns2.png" alt="">
-            SenMask
+            SenMask221
             <img class="logo_img" src="<?php echo base_url(); ?>assets/img/logo_trns.png" alt="">
         </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

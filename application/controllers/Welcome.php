@@ -55,7 +55,40 @@ class Welcome extends CI_Controller {
 		);
 		$this->load->view('inscription',$data);
 	}
+	/* public function uploadImage()
+	{
 
+		$data = [];
+
+		$count = count($_FILES['files']['name']);
+
+		for ($i = 0; $i < $count; $i++) {
+
+			if (!empty($_FILES['files']['name'][$i])) {
+
+				$_FILES['file']['name'] = $_FILES['files']['name'][$i];
+				$_FILES['file']['type'] = $_FILES['files']['type'][$i];
+				$_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+				$_FILES['file']['error'] = $_FILES['files']['error'][$i];
+				$_FILES['file']['size'] = $_FILES['files']['size'][$i];
+
+				$config['upload_path'] = './assets/img/mask/';
+				$config['allowed_types'] = 'jpg|jpeg|png|gif';
+				$config['max_size'] = '125000';
+				$config['file_name'] = $_FILES['files']['name'][$i];
+
+				$this->load->library('upload', $config);
+
+				if ($this->upload->do_upload('file')) {
+					$uploadData = $this->upload->data();
+					$filename = $uploadData['file_name'];
+					$data['totalFiles'][] = $filename;
+				}
+			}
+		}
+
+		return $data;
+	} */
 	public function doPublier()
 	{
 		$format = "Y-m-d H:i:s";
@@ -69,50 +102,52 @@ class Welcome extends CI_Controller {
 			"codeqrt" => $this->input->post("quartier"),
 		);
 		$config = array(
-			'upload_path' => "./assets/img/profiles",
-			'allowed_types' => "gif|jpg|png|jpeg",
+			'upload_path' => "./assets/img/album",
+			'allowed_types' => "gif|jpg|png|jpeg|pdf",
 			'overwrite' => TRUE,
-			'max_size' => "6048000", 
-			'max_height' => "2768",
-			'max_width' => "2724"
+			'max_size' => "6048000",
+			'max_height' => "12768",
+			'max_width' => "22724"
 		);
 
 		$this->load->library('upload', $config);
 
-		if (!$this->upload->do_upload()) {
+		if (!$this->upload->do_upload('certificat')) {
 			$error = array('error' => $this->upload->display_errors());
-			$this->session->set_flashdata('eroor_p', $error);
-			redirect("welcome/publier"); exit;
 		} else {
-			$data = $this->upload->data();
-			$data_user['photo'] = $data['file_name'];
+			$fileData = $this->upload->data();
+			$data_user['certificat'] = $fileData['file_name'];
 		}
-		if ($this->input->post('certificat')) {
-			$data['certificat'] = $this->input->post('certificat');
-			$config1 = array(
-				'upload_path' => "./assets/img/certificats",
-				'allowed_types' => "gif|jpg|png|jpeg",
-				'overwrite' => TRUE,
-				'max_size' => "6048000",
-				'max_height' => "2768",
-				'max_width' => "2724"
-			);
 
-			$this->load->library('upload', $config1);
-
-			if (!$this->upload->do_upload('certificat')) {
-				$error = array('error' => $this->upload->display_errors());
-				$this->session->set_flashdata('eroor_p', $error);
-				redirect("welcome/publier");
-				exit;
-			} else {
-				$data = $this->upload->data();
-				$data_user['photo'] = $data['file_name'];
-			}
+		if (!$this->upload->do_upload('photo')) {
+			$error = array('error' => $this->upload->display_errors());
+		} else {
+			$fileData = $this->upload->data();
+			$data_user['photo'] = $fileData['file_name'];
 		}
+
+		if (!$this->upload->do_upload('photo2')) {
+			$error = array('error' => $this->upload->display_errors());
+		} else {
+			$fileData = $this->upload->data();
+			$data_user['photo2'] = $fileData['file_name'];
+		}
+		if (!$this->upload->do_upload('photo3')) {
+			$error = array('error' => $this->upload->display_errors());
+		} else {
+			$fileData = $this->upload->data();
+			$data_user['photo3'] = $fileData['file_name'];
+		}
+		/* print_r($data_user);
+		die; */
 		$insrt = $this->senmask->publier($data_user);
 		if ($insrt) {
 			$this->session->set_flashdata('message', 'ajout_succed');
+			$reg = $this->input->post("region");
+			redirect("welcome/region/$reg");
+		}else {
+			$this->session->set_flashdata('message', 'ajout_failed');
+			redirect('welcome/publier');
 		}
 		
 	}

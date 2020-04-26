@@ -13,11 +13,11 @@
         public function publier($data)
         {
             $user = $this->db->get_where('initiative',array("num_tel" => $data['num_tel']));
-            $reg = $this->input->post("region");
+            
             if ($user->num_rows() == '0') {//jamais pub
                 if ($this->db->insert('initiative',$data)) {
                     $this->session->set_flashdata('message', 'insc_succed');
-                    redirect("Welcome/region/$reg");
+                    return true;
                 }else{
                     $this->session->set_flashdata('message', 'insc_error');
                     redirect('Welcome/publier');
@@ -25,7 +25,7 @@
             }else{ // Une fois pub alors undate
                 $this->db->update('initiative',$data);
                 $this->session->set_flashdata('message', 'updated');
-                redirect("Welcome/region/$reg");
+                return true;
             }
 
         }
@@ -135,6 +135,10 @@
             $q = $this->db->get_where('quartier',array('codequartier' => $codequartier));
             return $q->result();
         } 
+        public function uploadImages($data)
+        {
+            return $this->db->insert($data);
+        }
     }
 
 ?>

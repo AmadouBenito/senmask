@@ -33,7 +33,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-map-marked"></i> </span>
                     </div>
-                    <select id="region" name="region" class="form-control" required>
+                    <select required id="region" name="region" class="form-control">
                         <option value=""> Sélectionnez votre région</option>
                         <?php foreach ($regions as $region) {
                             echo "<option value='" . $region->coderegion . "'>" . $region->nomregion . "</option>";
@@ -45,7 +45,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-map-marked"></i> </span>
                     </div>
-                    <select id="departement" name="departement" class="form-control" required>
+                    <select required id="departement" name="departement" class="form-control">
                         <option value=""> Sélectionnez une region d'abord</option>
 
                     </select>
@@ -55,7 +55,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-map-marked"></i> </span>
                     </div>
-                    <select id="commune" name="commune" class="form-control" required>
+                    <select required id="commune" name="commune" class="form-control">
                         <option value=""> Sélectionnez un département d'abord</option>
                     </select>
                 </div>
@@ -64,7 +64,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-map-marked"></i> </span>
                     </div>
-                    <select id="quartier" name="quartier" class="form-control" required>
+                    <select required id="quartier" name="quartier" class="form-control">
                         <option value=""> Sélectionnez une commune d'abord</option>
                     </select>
                 </div>
@@ -85,25 +85,37 @@
                     </select>
                     <input required name="prix" class="form-control" placeholder="Prix unitaire" type="number">
                 </div>
-                <!-- Image profile -->
-                <div class="form-group input-group" style="margin: unset">
-                    <input class="form-control" placeholder="Une photo de masque" disabled type="text" style="border: none !important; background: unset; padding: unset !important">
-                </div>
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-image"></i> </span>
-                    </div>
-                    <input name="userfile" id="userfile" class="form-control"  type="file">
-                </div>
                 <!-- Image certificas -->
                 <div class="form-group input-group" style="margin: unset">
-                    <input class="form-control" placeholder="Photo de certificat(Pas obligatoire)" disabled type="text" style="border: none !important; background: unset; padding: unset !important">
+                    <input class="form-control" placeholder="Photo de certificat(Pas obligatoire)" type="text" style="border: none !important; background: unset; padding: unset !important">
                 </div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-image"></i> </span>
                     </div>
-                    <input name="certificat" id="certificat" class="form-control" type="file">
+                    <input required name="certificat" id="certificat" class="form-control" type="file">
+                </div>
+                <!-- Images masques -->
+                <div class="form-group input-group" style="margin: unset">
+                    <input class="form-control" placeholder="Mettez les photos de vos masques" type="text" style="border: none !important; background: unset; padding: unset !important">
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-image"></i> </span>
+                    </div>
+                    <input required name="photo" id="photo" class="form-control" type="file">
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-image"></i> </span>
+                    </div>
+                    <input  name="photo2" id="photo2" class="form-control" type="file">
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-image"></i> </span>
+                    </div>
+                    <input  name="photo3" id="photo3" class="form-control" type="file">
                 </div>
                 <!--Button -->
                 <div class="form-group">
@@ -134,12 +146,10 @@
                     },
                     success: function(data) {
                         $('#departement').html(data);
-                        $('#commune').html('<option value="">Selectionez une commune</option>');
                     }
                 });
             } else {
                 $('#departement').html('<option value="">Selectionnez un departement</option>');
-                $('#commune').html('<option value="">Selectionnez une commune</option>');
             }
         });
 
@@ -154,12 +164,11 @@
                     },
                     success: function(data) {
                         $('#commune').html(data);
-                        $('#quartier').html('<option value="">Selectionnez un quartier/village </option>');
+                        $('#quartier').html('<option value="">Sélectionnez commune d\'abord </option>');
                     }
                 });
             } else {
                 $('#commune').html('<option value="">Selectionnez une commune</option>');
-                $('#quartier').html('<option value="">Selectionnez un quartier/village </option>');
             }
         });
 
@@ -177,7 +186,7 @@
                     }
                 });
             } else {
-                $('#quartier').html('<option value="">Selectionnez un quartier/village </option>');
+                $('#quartier').html('<option value="">Sélectionnez commune d\'abord </option>');
             }
         });
     });
