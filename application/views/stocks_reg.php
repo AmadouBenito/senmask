@@ -26,14 +26,14 @@
                                 <div class="row">
                                     <?php foreach ($promoteurs as $promoteur) { ?>
                                         <?php if ($promoteur->id_departement == $dep->codedepartement) { $j++?>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="contact-box center-version">
                                                     <a href="#profile.html">
                                                         <img alt="image" class="img-circle"
                                                              src="<?php echo base_url() ?>/assets/img/profiles/<?php echo $promoteur->photo ?>">
                                                         <h3 class="m-b-xs"><strong style="color: #f4623a"><?php echo $promoteur->prom_init ?></strong></h3>
                                                         <h6 style="color: #343a40"><i class="fa fa-map-marked"></i>Commune/Quartier</h6>
-                                                        <h5 style="color: #f4623a">
+                                                        <h5 style="color: #f4623a; text-transform: lowercase">
                                                             <?php 
                                                                 foreach ($communes as $commune) { 
                                                                     if ($commune->codecommune == substr($promoteur->codeqrt, 0, 8)) {
