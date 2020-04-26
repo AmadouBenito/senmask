@@ -85,12 +85,25 @@
                     </select>
                     <input required name="prix" class="form-control" placeholder="Prix unitaire" type="number">
                 </div>
-                <!-- Image -->
+                <!-- Image profile -->
+                <div class="form-group input-group" style="margin: unset">
+                    <input class="form-control" placeholder="Une photo de masque" disabled type="text" style="border: none !important; background: unset; padding: unset !important">
+                </div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-image"></i> </span>
                     </div>
-                    <input name="userfile" id="userfile" class="form-control" placeholder="Photo de masque" type="file">
+                    <input name="userfile" id="userfile" class="form-control"  type="file">
+                </div>
+                <!-- Image certificas -->
+                <div class="form-group input-group" style="margin: unset">
+                    <input class="form-control" placeholder="Photo de certificat(Pas obligatoire)" disabled type="text" style="border: none !important; background: unset; padding: unset !important">
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-image"></i> </span>
+                    </div>
+                    <input name="certificat" id="certificat" class="form-control" type="file">
                 </div>
                 <!--Button -->
                 <div class="form-group">

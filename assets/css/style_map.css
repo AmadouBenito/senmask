@@ -363,9 +363,9 @@
 }
 
 .contact-box.center-version>a img {
-	width: 80px;
-	height: 80px;
-	margin-top: 10px;
+	width: 120px;
+	height: 120px;
+	margin-top: 5px;
     margin-bottom: 10px;
     border-radius: 20%;
 }

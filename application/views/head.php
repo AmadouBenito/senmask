@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url() ?>assets/admin/img/favorit.ico">
     <title>SenMask</title>
     <!-- Font Awesome icons (free version)-->
     <script src="<?php echo base_url() ?>assets/js/scrip_js.js" crossorigin="anonymous"></script>

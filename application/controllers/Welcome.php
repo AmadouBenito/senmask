@@ -87,6 +87,29 @@ class Welcome extends CI_Controller {
 			$data = $this->upload->data();
 			$data_user['photo'] = $data['file_name'];
 		}
+		if ($this->input->post('certificat')) {
+			$data['certificat'] = $this->input->post('certificat');
+			$config1 = array(
+				'upload_path' => "./assets/img/certificats",
+				'allowed_types' => "gif|jpg|png|jpeg",
+				'overwrite' => TRUE,
+				'max_size' => "6048000",
+				'max_height' => "2768",
+				'max_width' => "2724"
+			);
+
+			$this->load->library('upload', $config1);
+
+			if (!$this->upload->do_upload('certificat')) {
+				$error = array('error' => $this->upload->display_errors());
+				$this->session->set_flashdata('eroor_p', $error);
+				redirect("welcome/publier");
+				exit;
+			} else {
+				$data = $this->upload->data();
+				$data_user['photo'] = $data['file_name'];
+			}
+		}
 		$insrt = $this->senmask->publier($data_user);
 		if ($insrt) {
 			$this->session->set_flashdata('message', 'ajout_succed');
