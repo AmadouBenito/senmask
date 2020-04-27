@@ -11,8 +11,26 @@ class Welcome extends CI_Controller {
 		$this->load->model('senmask');
 	}
 	public function index()
-	{
-		$this->load->view('home');
+	{	
+		$data =array(
+			'promoteur01' => $this->senmask->getNbPromoteur("01"),
+			'promoteur02' => $this->senmask->getNbPromoteur("02"),
+			'promoteur03' => $this->senmask->getNbPromoteur("03"),
+			'promoteur04' => $this->senmask->getNbPromoteur("04"),
+			'promoteur05' => $this->senmask->getNbPromoteur("05"),
+			'promoteur06' => $this->senmask->getNbPromoteur("06"),
+			'promoteur07' => $this->senmask->getNbPromoteur("07"),
+			'promoteur08' => $this->senmask->getNbPromoteur("08"),
+			'promoteur09' => $this->senmask->getNbPromoteur("09"),
+			'promoteur10' => $this->senmask->getNbPromoteur("10"),
+			'promoteur11' => $this->senmask->getNbPromoteur("11"),
+			'promoteur12' => $this->senmask->getNbPromoteur("12"),
+			'promoteur13' => $this->senmask->getNbPromoteur("13"),
+			'promoteur14' => $this->senmask->getNbPromoteur("14"),
+		);
+		/* print_r($data);
+		die; */
+		$this->load->view('home',$data);
 	}
 
 	public function region($code_region)

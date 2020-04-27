@@ -85,6 +85,15 @@
             $q = $this->db->get();
             return $q->result();  
         }
+        public function getNbPromoteur($coderegion)
+        {
+            $this->db->select('*');
+            $this->db->from('initiative');
+            $this->db->where('archivé' ,0);
+            $this->db->like('id_departement', $coderegion, 'after');
+            $q = $this->db->get();
+            return $q->num_rows();  
+        }
         function fetch_dep($coderegion)
         {
 
