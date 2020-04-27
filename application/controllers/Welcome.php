@@ -55,40 +55,7 @@ class Welcome extends CI_Controller {
 		);
 		$this->load->view('inscription',$data);
 	}
-	/* public function uploadImage()
-	{
-
-		$data = [];
-
-		$count = count($_FILES['files']['name']);
-
-		for ($i = 0; $i < $count; $i++) {
-
-			if (!empty($_FILES['files']['name'][$i])) {
-
-				$_FILES['file']['name'] = $_FILES['files']['name'][$i];
-				$_FILES['file']['type'] = $_FILES['files']['type'][$i];
-				$_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
-				$_FILES['file']['error'] = $_FILES['files']['error'][$i];
-				$_FILES['file']['size'] = $_FILES['files']['size'][$i];
-
-				$config['upload_path'] = './assets/img/mask/';
-				$config['allowed_types'] = 'jpg|jpeg|png|gif';
-				$config['max_size'] = '125000';
-				$config['file_name'] = $_FILES['files']['name'][$i];
-
-				$this->load->library('upload', $config);
-
-				if ($this->upload->do_upload('file')) {
-					$uploadData = $this->upload->data();
-					$filename = $uploadData['file_name'];
-					$data['totalFiles'][] = $filename;
-				}
-			}
-		}
-
-		return $data;
-	} */
+	
 	public function doPublier()
 	{
 		$format = "Y-m-d H:i:s";
@@ -167,14 +134,70 @@ class Welcome extends CI_Controller {
 		return $nom->nomquartier;
 	}
 
-	/* public function commune_of($coderegion)
+	public function getNomRegion($coderegion)
 	{
-		return $this->senmask->getCommuneById($coderegion);
+		return $this->senmask->getNomRegion($coderegion)[0];
+	}
+	public function getNomDepartement($codedepartement)
+	{
+		return $this->senmask->getNomDepartement($codedepartement)[0];
+	}
+	public function Admin()
+	{
+		$this->load->view('admin');
+	}
+	public function home_admin()
+	{	
+		$data = array(
+			'prom_cert' => $this->senmask->prom_cert(),
+			'regions' => $this->senmask->get("region"),
+			'departements' => $this->senmask->get("departement"),
+		);
+		$this->load->view('home_admin',$data);
+	}
+	public function doLogin()
+	{
+		$session_data = array();
+		$data = array(
+			'user_login' => $this->input->post('login'),
+			'motdepasse' => $this->input->post('password')
+		);
+		$user_data = $this->senmask->login($data);
+		if ($user_data) {
+			foreach ($user_data as $row) {
+				$session_data = array(
+					'user_name' => $row->nom_complet,
+					'logged_in' => TRUE
+				);
+				$this->session->set_userdata($session_data);
+				$this->session->set_flashdata('message', 'succes');
+				redirect('Welcome/home_admin');
+			}
+		} else {
+			$this->session->set_flashdata('message', 'wrong');
+			redirect('');
+		}
+	}
+	public function logout()
+	{
+		$this->session->unset_userdata('user_name');
+		$this->session->unset_userdata('logged_in');
+		$this->session->sess_destroy();
+
+		$this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
+		$this->output->set_header("Pragma: no-cache");
+		redirect('Welcome/admin');
 	}
 
-	public function quartier_of($coderegion)
+	public function certifier($id)
 	{
-		return $this->senmask->getQuartierById($coderegion);
-	} */
+		$this->senmask->certifier($id);
+	}
+
+	public function archiver($id)
+	{
+		$this->senmask->archiver($id);
+	}
+
 }
 ?>

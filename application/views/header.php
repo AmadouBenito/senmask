@@ -12,7 +12,7 @@
             <div class="col-lg-8 align-self-baseline">
                 <p class="text-white-75 font-weight-light mb-5">
                     Cette plateforme permet la visualisation des informations sur les stocks en fonction des localités. <br />
-                    Elle permet aussi à tout distributeur(vendeurs) de masques de pouvoir <span style="color: #f4623a">publier ses informations.</span> <br>
+                    Elle permet aussi à tout distributeur(vendeur) de masques de pouvoir <span style="color: #f4623a">publier ses informations.</span> <br>
                 </p>
                 <a class="btn btn-primary btn-xl js-scroll-trigger" href="#localite">En savoir plus</a>
             </div>

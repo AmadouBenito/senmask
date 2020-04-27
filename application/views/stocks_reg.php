@@ -75,7 +75,7 @@
                                     <?php } ?>
                                     <?php if ($j == 0) { ?>
                                         <h1>Aucun distributeur inscrit dans ce département. <br>
-                                            Si vous en connaissez un, veuillez lui demander de publier son stock par ici.
+                                            Si vous en connaissez un, veuillez lui demander de publier son stock ici.
                                         </h1>
                                     <?php } ?>
                                 </div>

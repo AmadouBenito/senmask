@@ -29,13 +29,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
+                <!-- <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
                     <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
                     <div> (+221) 77 000 00 00</div>
-                </div>
+                </div> -->
+                <div class="col-4"></div>
                 <div class="col-lg-4 mr-auto text-center">
                     <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
-                    <a class="d-block" href="mailto:senmask@gmail.com">senmask@gmail.com</a>
+                    <a class="d-block" href="mailto:senmask221@gmail.com">senmask221@gmail.com</a>
                 </div>
             </div>
         </div>

@@ -80,6 +80,7 @@
         {
             $this->db->select('*');
             $this->db->from('initiative');
+            $this->db->where('archivé' ,0);
             $this->db->like('id_departement', $coderegion, 'after');
             $q = $this->db->get();
             return $q->result();  
@@ -135,9 +136,58 @@
             $q = $this->db->get_where('quartier',array('codequartier' => $codequartier));
             return $q->result();
         } 
+
+        public function prom_cert()
+        {
+            $q = $this->db->get_where('initiative',array('certificat !=' => NULL, 'archivé' => 0) );
+            return $q->result();
+        }
+        public function getNomRegion($coderegion)
+        {
+            $q = $this->db->get_where('region',array('coderegion', $coderegion));
+            return $q->result();
+        }
+        public function getNomDepartement($codedepartement)
+        {
+            $q = $this->db->get_where('departement',array('codedepartement', $codedepartement));
+            return $q->result();
+        }
         public function uploadImages($data)
         {
             return $this->db->insert($data);
+        }
+        public function certifier($id)
+        {
+            $data = [
+                'certifié' => '1',
+            ];
+            $this->db->where('id_init', $id);
+            $q = $this->db->update('initiative',$data);
+            if ($q) {
+                $this->session->set_flashdata('message', 'update_succes');
+                redirect('welcome/home_admin');
+            }
+        }
+        public function archiver($id)
+        {
+            $data = [
+                'archivé' => '1',
+            ];
+            $this->db->where('id_init', $id);
+            $q = $this->db->update('initiative',$data);
+            if ($q) {
+                $this->session->set_flashdata('message', 'archive_succes');
+                redirect('welcome/home_admin');
+            }
+        }
+        public function login($data_user)
+        {  
+            $query = $this->db->get_where("users", array("user_login" => $data_user['user_login'],"motdepasse" => $data_user['motdepasse']));
+            if ($query->num_rows() == 1) {
+                return $query->result();
+            } else {# Sinon on cherche s'il est client
+                return false;
+            }
         }
     }
 
