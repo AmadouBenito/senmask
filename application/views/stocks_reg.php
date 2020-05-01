@@ -32,6 +32,9 @@
                                                     <a href="#profile.html">
                                                         <img alt="image" class="img-circle" src="<?php echo base_url() ?>/assets/img/album/<?php echo $promoteur->photo ?>">
                                                         <h3 class="m-b-xs"><strong style="color: #f4623a"><?php echo $promoteur->prom_init ?></strong></h3>
+                                                        <?php if ($promoteur->certifié) { ?>
+                                                            <h5 class="m-b-xs"><strong style="color: green"><i class="fa fa-check-circle"></i>Certifié</strong></h5>
+                                                        <?php } ?>
                                                         <h6 style="color: #343a40"><i class="fa fa-map-marked"></i>Commune/Quartier</h6>
                                                         <h5 style="color: #f4623a; text-transform: lowercase">
                                                             <?php
