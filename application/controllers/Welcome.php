@@ -193,7 +193,7 @@ class Welcome extends CI_Controller {
 			}
 		} else {
 			$this->session->set_flashdata('message', 'wrong');
-			redirect('');
+			redirect('Welcome/admin');
 		}
 	}
 	public function logout()
