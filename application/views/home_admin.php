@@ -1,6 +1,6 @@
 <?php
 if (!$this->session->userdata('logged_in')) {
-    redirect('');
+    redirect('Welcome/admin');
 }
 ?>
 <?php $this->load->view('head'); ?>
@@ -12,7 +12,7 @@ if (!$this->session->userdata('logged_in')) {
     <div class="container">
         <br>
         <div class="card bg-light">
-            <h4 class="card-title mt-3 text-center">Connexion</h4>
+            <h4 class="card-title mt-3 text-center">Liste des distributeurs </h4>
             <p class="divider-text"></p>
             <table class="table table-striped">
                 <thead>
