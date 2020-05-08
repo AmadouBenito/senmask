@@ -1,3 +1,9 @@
+
+<?php
+error_reporting(0);
+$this->session->unset_userdata('logged_in');    
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -8,8 +14,6 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url() ?>assets/admin/img/favorit.ico">
     <title>SenMask</title>
-    <!-- Font Awesome icons (free version)-->
-    <script src="<?php echo base_url() ?>assets/js/scrip_js.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="<?php echo base_url() ?>assets/css/fam_Merr.css" rel="stylesheet" />
     <link href="<?php echo base_url() ?>assets/css/italic.css" rel="stylesheet" type="text/css" />
@@ -18,5 +22,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="<?php echo base_url() ?>assets/css/styles.css" rel="stylesheet" />
     <link href="<?php echo base_url() ?>assets/css/style_map.css" rel="stylesheet" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="<?php echo base_url() ?>assets/js/scrip_js.js" crossorigin="anonymous"></script>
 
 </head>

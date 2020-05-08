@@ -191,7 +191,7 @@
         }
         public function login($data_user)
         {  
-            $query = $this->db->get_where("users", array("user_login" => $data_user['user_login'],"motdepasse" => $data_user['motdepasse']));
+            $query = $this->db->get_where("users", array("user_login" => $data_user['user_login'],"motdepasse" => md5($data_user['motdepasse'])));
             if ($query->num_rows() == 1) {
                 return $query->result();
             } else {# Sinon on cherche s'il est client

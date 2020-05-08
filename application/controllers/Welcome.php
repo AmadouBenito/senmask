@@ -8,25 +8,25 @@ class Welcome extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url', 'form', 'date');
 		$this->load->library('session');
-		$this->load->model('senmask');
+		$this->load->model('Senmask');
 	}
 	public function index()
 	{	
 		$data =array(
-			'promoteur01' => $this->senmask->getNbPromoteur("01"),
-			'promoteur02' => $this->senmask->getNbPromoteur("02"),
-			'promoteur03' => $this->senmask->getNbPromoteur("03"),
-			'promoteur04' => $this->senmask->getNbPromoteur("04"),
-			'promoteur05' => $this->senmask->getNbPromoteur("05"),
-			'promoteur06' => $this->senmask->getNbPromoteur("06"),
-			'promoteur07' => $this->senmask->getNbPromoteur("07"),
-			'promoteur08' => $this->senmask->getNbPromoteur("08"),
-			'promoteur09' => $this->senmask->getNbPromoteur("09"),
-			'promoteur10' => $this->senmask->getNbPromoteur("10"),
-			'promoteur11' => $this->senmask->getNbPromoteur("11"),
-			'promoteur12' => $this->senmask->getNbPromoteur("12"),
-			'promoteur13' => $this->senmask->getNbPromoteur("13"),
-			'promoteur14' => $this->senmask->getNbPromoteur("14"),
+			'promoteur01' => $this->Senmask->getNbPromoteur("01"),
+			'promoteur02' => $this->Senmask->getNbPromoteur("02"),
+			'promoteur03' => $this->Senmask->getNbPromoteur("03"),
+			'promoteur04' => $this->Senmask->getNbPromoteur("04"),
+			'promoteur05' => $this->Senmask->getNbPromoteur("05"),
+			'promoteur06' => $this->Senmask->getNbPromoteur("06"),
+			'promoteur07' => $this->Senmask->getNbPromoteur("07"),
+			'promoteur08' => $this->Senmask->getNbPromoteur("08"),
+			'promoteur09' => $this->Senmask->getNbPromoteur("09"),
+			'promoteur10' => $this->Senmask->getNbPromoteur("10"),
+			'promoteur11' => $this->Senmask->getNbPromoteur("11"),
+			'promoteur12' => $this->Senmask->getNbPromoteur("12"),
+			'promoteur13' => $this->Senmask->getNbPromoteur("13"),
+			'promoteur14' => $this->Senmask->getNbPromoteur("14"),
 		);
 		/* print_r($data);
 		die; */
@@ -36,40 +36,40 @@ class Welcome extends CI_Controller {
 	public function region($code_region)
 	{
 		$data = array(
-			'regions' => $this->senmask->getRegionById($code_region),
-			'promoteurs' => $this->senmask->getInfoPromoteur($code_region),
-			'departements' => $this->senmask->getDepartementById($code_region),
-			'communes' => $this->senmask->getCommuneById($code_region),
-			'quartiers' => $this->senmask->getQuartierById($code_region),
+			'regions' => $this->Senmask->getRegionById($code_region),
+			'promoteurs' => $this->Senmask->getInfoPromoteur($code_region),
+			'departements' => $this->Senmask->getDepartementById($code_region),
+			'communes' => $this->Senmask->getCommuneById($code_region),
+			'quartiers' => $this->Senmask->getQuartierById($code_region),
 		);
 		$this->load->view('stocks_reg',$data);
 	}
 	function fetch_dep($coderegion)
 	{
 		if ($coderegion) {
-			echo $this->senmask->fetch_dep($coderegion);
+			echo $this->Senmask->fetch_dep($coderegion);
 		}
 	}
 
 	function fetch_com($codedepartement)
 	{
 		if ($codedepartement) {
-			echo $this->senmask->fetch_com($codedepartement);
+			echo $this->Senmask->fetch_com($codedepartement);
 		}
 	}
 
 	function fetch_qrt($codecommune)
 	{
 		if ($codecommune) {
-			echo $this->senmask->fetch_qrt($codecommune);
+			echo $this->Senmask->fetch_qrt($codecommune);
 		}
 	}
 
 	public function publier()
 	{	
 		$data = array(
-			'regions' => $this->senmask->get("region"),
-			'departements' => $this->senmask->get("departement"),
+			'regions' => $this->Senmask->get("region"),
+			'departements' => $this->Senmask->get("departement"),
 		);
 		$this->load->view('inscription',$data);
 	}
@@ -88,7 +88,7 @@ class Welcome extends CI_Controller {
 		);
 		$config = array(
 			'upload_path' => "./assets/img/album",
-			'allowed_types' => "gif|jpg|png|jpeg|pdf",
+			'allowed_types' => "gif|jpg|png|jpeg|pdf|PGN|JPG|JPEG",
 			'overwrite' => TRUE,
 			'max_size' => "6048000",
 			'max_height' => "12768",
@@ -125,7 +125,7 @@ class Welcome extends CI_Controller {
 		}
 		/* print_r($data_user);
 		die; */
-		$insrt = $this->senmask->publier($data_user);
+		$insrt = $this->Senmask->publier($data_user);
 		if ($insrt) {
 			$this->session->set_flashdata('message', 'ajout_succed');
 			$reg = $this->input->post("region");
@@ -139,14 +139,14 @@ class Welcome extends CI_Controller {
 	
 	public function getNomCommune($codecommune)
 	{
-		foreach ($this->senmask->getNomCommune($codecommune) as $value ) {
+		foreach ($this->Senmask->getNomCommune($codecommune) as $value ) {
 			$nom = $value;
 		}
 		return $nom->nomcommune;
 	}
 	public function getNomQuartier($codequartier)
 	{
-		foreach ($this->senmask->getNomQuartier($codequartier) as $value) {
+		foreach ($this->Senmask->getNomQuartier($codequartier) as $value) {
 			$nom = $value;
 		}
 		return $nom->nomquartier;
@@ -154,11 +154,11 @@ class Welcome extends CI_Controller {
 
 	public function getNomRegion($coderegion)
 	{
-		return $this->senmask->getNomRegion($coderegion)[0];
+		return $this->Senmask->getNomRegion($coderegion)[0];
 	}
 	public function getNomDepartement($codedepartement)
 	{
-		return $this->senmask->getNomDepartement($codedepartement)[0];
+		return $this->Senmask->getNomDepartement($codedepartement)[0];
 	}
 	public function Admin()
 	{
@@ -167,9 +167,9 @@ class Welcome extends CI_Controller {
 	public function home_admin()
 	{	
 		$data = array(
-			'prom_cert' => $this->senmask->prom_cert(),
-			'regions' => $this->senmask->get("region"),
-			'departements' => $this->senmask->get("departement"),
+			'prom_cert' => $this->Senmask->prom_cert(),
+			'regions' => $this->Senmask->get("region"),
+			'departements' => $this->Senmask->get("departement"),
 		);
 		$this->load->view('home_admin',$data);
 	}
@@ -180,7 +180,7 @@ class Welcome extends CI_Controller {
 			'user_login' => $this->input->post('login'),
 			'motdepasse' => $this->input->post('password')
 		);
-		$user_data = $this->senmask->login($data);
+		$user_data = $this->Senmask->login($data);
 		if ($user_data) {
 			foreach ($user_data as $row) {
 				$session_data = array(
@@ -209,12 +209,12 @@ class Welcome extends CI_Controller {
 
 	public function certifier($id)
 	{
-		$this->senmask->certifier($id);
+		$this->Senmask->certifier($id);
 	}
 
 	public function archiver($id)
 	{
-		$this->senmask->archiver($id);
+		$this->Senmask->archiver($id);
 	}
 
 }

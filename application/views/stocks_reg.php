@@ -30,7 +30,7 @@
                                             <div class="col-md-4">
                                                 <div class="contact-box center-version">
                                                     <a href="#profile.html">
-                                                        <img alt="image" class="img-circle" src="<?php echo base_url() ?>/assets/img/album/<?php echo $promoteur->photo ?>">
+                                                        <img alt="image" class="img-circle" src="<?php echo base_url(); ?>assets/img/album/<?php echo $promoteur->photo ?>">
                                                         <h3 class="m-b-xs"><strong style="color: #f4623a"><?php echo $promoteur->prom_init ?></strong></h3>
                                                         <?php if ($promoteur->certifié) { ?>
                                                             <h5 class="m-b-xs"><strong style="color: green"><i class="fa fa-check-circle"></i>Certifié</strong></h5>
