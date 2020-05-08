@@ -17,7 +17,7 @@
                     <?php if ($row->certificat) { ?>
                         <div class="row">
                             <div class="col-md-12">
-                                <img class="galery" src="<?php echo base_url() ?>/assets/img/album/<?php echo $row->certificat ?>" alt="">
+                                <img class="galery" src="<?php echo base_url() ?>assets/img/album/<?php echo $row->certificat ?>" alt="">
                             </div>
                         </div>
                     <?php } ?>
@@ -31,3 +31,4 @@
     </div>
 
 <?php } ?>
+	

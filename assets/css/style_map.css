@@ -72,7 +72,8 @@
 
 /* REGION CSS */
 
-/**/
+/* default */
+/**//**/
 /* main styles */
 /**/
 .pcss3t {
@@ -249,6 +250,7 @@
 	font-size: 13px;
 	line-height: 49px;
 }
+
 @media (max-width: 750px) {
 	.pcss3t>label {
 		padding: 0 7px;
@@ -257,6 +259,7 @@
 		line-height: 30px;
 	}
 }
+
 .pcss3t>label:hover {
     background: #f2f2f2;
     color: #f4623a;
@@ -614,4 +617,3 @@
 	padding-right: 5px;
 	border-radius: 50%;
 }
-

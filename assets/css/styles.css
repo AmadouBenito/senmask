@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -10038,7 +10037,7 @@ hr.light {
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
-  background: linear-gradient(to bottom, rgba(5, 15, 65, 0.8) 0%, rgba(17, 39, 54, 0.8) 100%), url("../img/3574144.jpg");
+  background: linear-gradient(to bottom, rgba(5, 15, 65, 0.8) 0%, rgba(17, 39, 54, 0.8) 100%),url("../img/3574144.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;

@@ -95,7 +95,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-image"></i> </span>
                     </div>
-                    <input required name="certificat" id="certificat" class="form-control" type="file">
+                    <input name="certificat" id="certificat" class="form-control" type="file">
                 </div>
                 <!-- Images masques -->
                 <div class="form-group input-group" style="margin: unset">

@@ -3,7 +3,7 @@
 <body id="page-top">
     <!-- Navigation-->
     <?php $this->load->view('nav'); ?>
-    <?php $this->load->view('header_Admin'); ?>
+    <?php $this->load->view('header_admin'); ?>
     <div class="container">
         <br>
         <div class="card bg-light">
@@ -28,7 +28,7 @@
 
                 <!--Button -->
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Publier </button>
+                    <button type="submit" class="btn btn-primary btn-block"> Se connecter</button>
                 </div>
                 <?php echo form_close(); ?>
             </article>

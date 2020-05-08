@@ -2,6 +2,7 @@
 
 <body id="page-top">
     <!-- Navigation-->
+	<?php $page = 0; ?>
     <?php $this->load->view('nav');
     $this->load->view('header'); ?>
 
@@ -21,7 +22,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
                     <h2 class="mt-0">Vous avez un stock de masques à vendre ?</h2>
-                    <a href="<?php echo base_url() ?>/index.php/Welcome/publier " class="btn btn-primary btn-xl js-scroll-trigger" href="#localite">
+                    <a href="<?php echo base_url() ?>index.php/Welcome/publier " class="btn btn-primary btn-xl js-scroll-trigger" href="#localite">
                         <i class="fas fa-upload "></i>
                         Publier le ici</a>
                     <hr class="divider my-4" />

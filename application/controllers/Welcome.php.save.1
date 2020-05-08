@@ -90,8 +90,10 @@ class Welcome extends CI_Controller {
 		      $config = array(
 			'upload_path' => "./assets/img/album",
 			'allowed_types' => "gif|jpg|png|jpeg|pdf|PNG|JPG|JPEG",
-			'overwrite' => FALSE,
-		        'max_size' => 6000000
+			'overwrite' => TRUE,
+			'max_size' => "9004800",
+			'max_height' => "967680",
+			'max_width' => "927240"
 		);
 
 		$this->load->library('upload', $config);

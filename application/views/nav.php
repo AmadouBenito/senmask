@@ -1,6 +1,10 @@
+<?php
+    $this->session->unset_userdata('logged_in');
+?>
+
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="<?php echo base_url() ?>">
+<a class="navbar-brand js-scroll-trigger" href="<?php echo base_url() ?>">
             <img class="logo_img" src="<?php echo base_url(); ?>assets/img/album/logo_gauche.png" alt="">
             SenMask221
             <img class="logo_img" src="<?php echo base_url(); ?>assets/img/album/logo_droit.png" alt="">
@@ -10,7 +14,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#localite">Localités</a></li>
+	         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?php echo base_url(); ?>">Accueil</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?php echo base_url(); ?>index.php/Welcome/publier">Publier son stock</a></li>
             </ul>
         </div>

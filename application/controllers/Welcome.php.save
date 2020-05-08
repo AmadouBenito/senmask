@@ -86,12 +86,19 @@ class Welcome extends CI_Controller {
 			"cap_prod" => $this->input->post("capacite"),
 			"codeqrt" => $this->input->post("quartier"),
 		);
-
-		      $config = array(
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('prom_init', 'Prom_init', 'required');
+		$this->form_validation->set_rules('num_tel', 'Num_tel', 'required');
+		$this->form_validation->set_rules('id_departement', 'departement', 'required');
+		$this->form_validation->set_rules('prix', 'prix', 'required');
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$config = array(
 			'upload_path' => "./assets/img/album",
 			'allowed_types' => "gif|jpg|png|jpeg|pdf|PNG|JPG|JPEG",
-			'overwrite' => FALSE,
-		        'max_size' => 6000000
+			'overwrite' => TRUE,
+			'max_size' => "6048000",
+			'max_height' => "12768",
+			'max_width' => "22724"
 		);
 
 		$this->load->library('upload', $config);
@@ -103,10 +110,8 @@ class Welcome extends CI_Controller {
 			$data_user['certificat'] = $fileData['file_name'];
 		}
 
-		if (!$this->upload->do_upload('photo')) 
-			 {
-                     $this->session->set_flashdata('message', 'error_photo');
-                      redirect('welcome/publier');
+		if (!$this->upload->do_upload('photo')) {
+			$error = array('error' => $this->upload->display_errors());
 		} else {
 			$fileData = $this->upload->data();
 			$data_user['photo'] = $fileData['file_name'];
@@ -135,6 +140,7 @@ class Welcome extends CI_Controller {
 			$this->session->set_flashdata('message', 'ajout_failed');
 			redirect('welcome/publier');
 		}
+		
 	}
 	
 	public function getNomCommune($codecommune)

@@ -20,7 +20,8 @@
             </div>
         </div>
     <?php } ?>
-    <?php if ($error_p) { ?>
+
+    <?php if ($message == "error_photo") { ?>
         <div class="row">
             <div class="col-sm-12">
                 <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
@@ -31,8 +32,8 @@
                         <span class="sr-only">Close</span>
                     </button>
                     <i class="start-icon far fa-check-circle faa-tada animated"></i>
-                    <strong class="font__weight-semibold">Une erreur s'est produite!</strong>
-                    Veillez charger une photo de taille plus petite
+                    <strong class="font__weight-semibold">Photos trop grandes!</strong>
+                    Veillez choisir des photos de plus petite taille
                 </div>
             </div>
         </div>

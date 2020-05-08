@@ -18,7 +18,7 @@
                         <div class="row">
                             <div class="col-2"></div>
                             <div class="col-md-8 col-sm-12">
-                                <img class="galery" src="<?php echo base_url() ?>/assets/img/album/<?php echo $promoteur->photo ?>" alt="">
+                                <img class="galery" src="<?php echo base_url() ?>assets/img/album/<?php echo $promoteur->photo ?>" alt="">
                             </div>
                         </div>
                     <?php } ?>
@@ -26,7 +26,7 @@
                         <div class="row">
                             <div class="col-2"></div>
                             <div class="col-md-8 col-sm-12">
-                                <img class="galery" src="<?php echo base_url() ?>/assets/img/album/<?php echo $promoteur->photo2 ?>" alt="">
+                                <img class="galery" src="<?php echo base_url() ?>assets/img/album/<?php echo $promoteur->photo2 ?>" alt="">
                             </div>
                         </div>
                     <?php } ?>
@@ -34,7 +34,7 @@
                         <div class="row">
                             <div class="col-2"></div>
                             <div class="col-md-8 col-sm-12">
-                                <img class="galery" src="<?php echo base_url() ?>/assets/img/album/<?php echo $promoteur->photo3 ?>" alt="">
+                                <img class="galery" src="<?php echo base_url() ?>assets/img/album/<?php echo $promoteur->photo3 ?>" alt="">
                             </div>
                         </div>
                     <?php } ?>

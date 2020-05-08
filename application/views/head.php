@@ -1,9 +1,6 @@
-
-<?php
-error_reporting(0);
-$this->session->unset_userdata('logged_in');    
+<?php 
+  error_reporting(0);
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 

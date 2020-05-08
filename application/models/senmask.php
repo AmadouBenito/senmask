@@ -1,6 +1,6 @@
 <?php 
 
-    class Senmask extends CI_Model{
+    class senmask extends CI_Model{
 
         public function __construct()
         {
@@ -14,7 +14,7 @@
         {
             $user = $this->db->get_where('initiative',array("num_tel" => $data['num_tel']));
             
-            if ($user->num_rows() == '0') {//jamais pub
+            if ($user->num_rows() == 0) {//jamais pub
                 if ($this->db->insert('initiative',$data)) {
                     $this->session->set_flashdata('message', 'insc_succed');
                     return true;
@@ -23,6 +23,7 @@
                     redirect('Welcome/publier');
                 }
             }else{ // Une fois pub alors undate
+		$this->db->where('num_tel',$data['num_tel']);
                 $this->db->update('initiative',$data);
                 $this->session->set_flashdata('message', 'updated');
                 return true;
