@@ -77,9 +77,7 @@
                                         <?php } ?>
                                     <?php } ?>
                                     <?php if ($j == 0) { ?>
-                                        <h1>Aucun distributeur inscrit dans ce département. <br>
-                                            Si vous en connaissez un, veuillez lui demander de publier son stock ici.
-                                        </h1>
+                                        <img src="<?php echo base_url(); ?>assets/img/album/no_dist.png" style="width: -webkit-fill-available;">
                                     <?php } ?>
                                 </div>
                             </div>
