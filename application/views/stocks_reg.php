@@ -89,7 +89,6 @@
                     </li>
                 </ul>
             </div>
-
         </div>
     </section>
     <?php $this->load->view('footer'); ?>

@@ -55,7 +55,6 @@
         </div>
     <?php } ?>
     <?php
-    $message = $this->session->flashdata('message');
     if ($message == "succes") { ?>
         <div class="row">
             <div class="col-sm-12">
@@ -77,9 +76,21 @@
     <div class="container h-100">
         <div class="row h-100 align-items-center justify-content-center text-center">
             <div class="col-lg-10 align-self-end">
-                <h1 class="text-uppercase text-white font-weight-bold">
-                    Bienvenue dans la partie <br><span style="color: #f4623a">Administration</span><br>
-                </h1>
+                <?php if ($this->session->userdata('logged_in')) { ?>
+                    <?php if ($this->session->userdata('niveau') == 1) { ?>
+                    <h1 class="text-uppercase text-white font-weight-bold">
+                        Espace d'<span style="color: #f4623a">administration</span><br>
+                    </h1>
+                    <?php } elseif ($this->session->userdata('niveau') == 0) { ?>
+                        <h1 class="text-uppercase text-white font-weight-bold">
+                            Espace de gestion des stocks et des commandes de<br><span style="color: #f4623a"><?php echo $this->session->userdata('user_name'); ?></span><br>
+                        </h1>
+                    <?php } ?>
+                <?php } else{ ?>
+                    <h1 class="text-uppercase text-white font-weight-bold">
+                        Bienvenue dans votre espace de <br><span style="color: #f4623a">connexion</span><br>
+                    </h1>
+                <?php } ?>
                 <hr class="divider my-4" />
             </div>
         </div>

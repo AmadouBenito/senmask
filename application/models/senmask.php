@@ -22,8 +22,8 @@
                     $this->session->set_flashdata('message', 'insc_error');
                     redirect('Welcome/publier');
                 }
-            }else{ // Une fois pub alors undate
-		$this->db->where('num_tel',$data['num_tel']);
+            }else{ // Une fois pub alors upate
+		        $this->db->where('num_tel',$data['num_tel']);
                 $this->db->update('initiative',$data);
                 $this->session->set_flashdata('message', 'updated');
                 return true;
@@ -190,15 +190,26 @@
                 redirect('welcome/home_admin');
             }
         }
+
+        /* Modif du 25 Mai 2020 */
         public function login($data_user)
-        {  
+        {   /* Cherhcez un admin */
             $query = $this->db->get_where("users", array("user_login" => $data_user['user_login'],"motdepasse" => md5($data_user['motdepasse'])));
             if ($query->num_rows() == 1) {
+            /* print_r($query->result());
+            die; */
                 return $query->result();
-            } else {# Sinon on cherche s'il est client
-                return false;
+            } else { # Sinon on cherche s'il est client
+                $query = $this->db->get_where("initiative", array("num_tel" => $data_user['user_login'], "mdp" => md5($data_user['motdepasse'])));
+                if ($query->num_rows() == 1) {
+                    return $query->result();
+                }else {
+                    return false;
+                }
             }
         }
+
+        
     }
 
 ?>

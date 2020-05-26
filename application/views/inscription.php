@@ -8,8 +8,8 @@
         <br>
         <div class="card bg-light">
             <article class="card-body mx-auto" style="max-width: 400px;">
-                <h4 class="card-title mt-3 text-center">Si vous avez une fois publié, mettez le même numéro téléphone pour mettre à jour vos informations</h4>
-                <p class="divider-text"></p>
+                <!-- <h4 class="card-title mt-3 text-center">Si vous avez une fois publié, mettez le même numéro téléphone pour mettre à jour vos informations</h4>
+                <p class="divider-text"></p> -->
                 <?php echo form_open_multipart('/Welcome/doPublier'); ?>
                 <!-- Utilisateur -->
                 <div class="form-group input-group">
@@ -27,6 +27,20 @@
                         <option value="">+221</option>
                     </select>
                     <input required name="numero_tel" class="form-control" placeholder="Numéro de téléphone" type="number">
+                </div>
+                <!-- Mot de passe -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input required name="password" class="form-control" placeholder="Définissez un mot de passe" type="password">
+                </div>
+                <!-- Confirmation Mot de passe -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input required name="password_conf" class="form-control" placeholder="Confirmez le mot de passe" type="password">
                 </div>
                 <!--Region -->
                 <div class="form-group input-group">
@@ -75,22 +89,21 @@
                     </div>
                     <input required name="capacite" class="form-control" placeholder="Capacité de production de masques" type="number">
                 </div>
-                <!-- Prix -->
+                <!-- Nombre de masques disponibles  -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-money-bill"></i> </span>
+                        <span class="input-group-text"> <i class="fa fa-chart-line"></i> </span>
                     </div>
-                    <select class="custom-select" style="max-width: 90px;">
-                        <option value="">CFA</option>
-                    </select>
-                    <input required name="prix" class="form-control" placeholder="Prix unitaire" type="number">
+                    <input required name="mask_dispo" class="form-control" placeholder="Nombre de masques disponibles" type="number">
                 </div>
-                <br> <hr>
-                <span style="color: orange">Images acceptées: JPEG, JPG, PNG ou GIF</span>
+                <br>
+                <hr>
+                <span style="color: orange">Images acceptées: JPEG, JPG ou PNG</span>
                 <!-- Image certificas -->
                 <div class="form-group input-group" style="margin: unset">
                     <input class="form-control" placeholder="Photo de certificat(Pas obligatoire)" type="text" style="border: none !important; background: unset; padding: unset !important">
                 </div>
+                <!-- Certificat -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-image"></i> </span>
@@ -98,7 +111,7 @@
                     <input name="certificat" id="certificat" class="form-control" type="file">
                 </div>
                 <!-- Images masques -->
-                <div class="form-group input-group" style="margin: unset">
+                <!-- <div class="form-group input-group" style="margin: unset">
                     <input class="form-control" placeholder="Mettez les photos de vos masques" type="text" style="border: none !important; background: unset; padding: unset !important">
                 </div>
                 <div class="form-group input-group">
@@ -118,10 +131,10 @@
                         <span class="input-group-text"> <i class="fa fa-image"></i> </span>
                     </div>
                     <input name="photo3" id="photo3" class="form-control" type="file">
-                </div>
+                </div> -->
                 <!--Button -->
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Publier </button>
+                    <button type="submit" class="btn btn-primary btn-block"> Suivant <i class="fa fa-arrow-circle-right"></i> </button>
                 </div>
                 <?php echo form_close(); ?>
             </article>
@@ -137,7 +150,7 @@
     $(document).ready(function() {
         $('#region').change(function() {
             var coderegion = $('#region').val();
-            console.log(coderegion)
+            /* console.log(coderegion) */
 
             if (coderegion != '') {
                 $.ajax({

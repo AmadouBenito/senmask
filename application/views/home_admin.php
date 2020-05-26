@@ -1,6 +1,6 @@
 <?php
 if (!$this->session->userdata('logged_in')) {
-    redirect('Welcome/admin');
+    redirect('Welcome/connexion');
 }
 ?>
 <?php $this->load->view('head'); ?>
