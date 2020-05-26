@@ -66,49 +66,40 @@ class Welcome extends CI_Controller {
 			echo $this->senmask->fetch_qrt($codecommune);
 		}
 	}
-
+/* Charger la page de publication */
 	public function publier()
 	{	
 		$data = array(
 			'regions' => $this->senmask->get("region"),
-			'departements' => $this->senmask->get("departement"),
+			/* 'departements' => $this->senmask->get("departement"), */
 		);
 		$this->load->view('inscription',$data);
 	}
 	
-	public function doPublier()
+	public function insert_photo($data_photo)
 	{
-		$format = "Y-m-d H:i:s";
-		$data_user = array(
-			"prom_init" => $this->input->post("promoteur"),
-			"num_tel" => $this->input->post("numero_tel"),
-			"id_departement" => $this->input->post("departement"),
-			"date" => date($format),
-			"prix" => $this->input->post("prix"),
-			"cap_prod" => $this->input->post("capacite"),
-			"codeqrt" => $this->input->post("quartier"),
-		);
-
-		      $config = array(
+		$config = array(
 			'upload_path' => "./assets/img/album",
 			'allowed_types' => "gif|jpg|png|jpeg|pdf|PNG|JPG|JPEG",
 			'overwrite' => FALSE,
-		        'max_size' => 6000000
+			'max_size' => 6000000 // 6MO
 		);
+
 
 		$this->load->library('upload', $config);
 
-		if (!$this->upload->do_upload('certificat')) {
+		if (!$this->upload->do_upload('photo')) {
 			$error = array('error' => $this->upload->display_errors());
 		} else {
 			$fileData = $this->upload->data();
-			$data_user['certificat'] = $fileData['file_name'];
-		}
+			$data_photo['photo'] = $fileData['file_name'];
+			/* data */
+			$ins = $this->Senmask->insert_photo($data_photo);
+		}	
 
-		if (!$this->upload->do_upload('photo')) 
-			 {
-                     $this->session->set_flashdata('message', 'error_photo');
-                      redirect('welcome/publier');
+		/* if (!$this->upload->do_upload('photo')) {
+			$this->session->set_flashdata('message', 'error_photo');
+			redirect('welcome/publier');
 		} else {
 			$fileData = $this->upload->data();
 			$data_image1 = array (
@@ -131,24 +122,56 @@ class Welcome extends CI_Controller {
 			$error = array('error' => $this->upload->display_errors());
 		} else {
 			$fileData = $this->upload->data();
-			$data_image3 = array (
-				"photo" => $fileData['file_name'],
-				"initiative_id_init" => $this->input->post("numero_tel"),
-			);
-		}
+			$data_user['photo3'] = $fileData['file_name'];
+		} */
+	}
+
+	public function doPublier()
+	{ 
+		$format = "Y-m-d H:i:s";
+		$data_user = array(
+			"prom_init" => $this->input->post("promoteur"),
+			"num_tel" => $this->input->post("numero_tel"),
+			"id_departement" => $this->input->post("departement"),
+			"date" => date($format),
+			"nb_mask_dispo" => $this->input->post("mask_dispo"),
+			"cap_prod" => $this->input->post("capacite"),
+			"codeqrt" => $this->input->post("quartier"),
+			"mdp" => md5($this->input->post("password")),
+			
+		);
+
+		$config = array(
+			'upload_path' => "./assets/img/album",
+			'allowed_types' => "gif|jpg|png|jpeg|pdf|PNG|JPG|JPEG",
+			'overwrite' => FALSE,
+			'max_size' => 6000 // 6MO
+		);
+
+
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload('certificat')) {
+			$error = array('error' => $this->upload->display_errors());
+		} else {
+			$fileData = $this->upload->data();
+			$data_user['certificat'] = $fileData['file_name'];
+		}	
+
 		/* print_r($data_user);
 		die; */
-		$insrt = $this->senmask->publier($data_user, $data_image1, $data_image2, $data_image3);
+
+		$insrt = $this->senmask->publier($data_user);
 		if ($insrt) {
 			$this->session->set_flashdata('message', 'ajout_succed');
-			$reg = $this->input->post("region");
-			redirect("welcome/region/$reg");
+			/* $reg = $this->input->post("region"); */
+			//redirect("welcome/region/$reg");
+			redirect('welcome/connexion');
 		}else {
 			$this->session->set_flashdata('message', 'ajout_failed');
 			redirect('welcome/publier');
 		}
 	}
-	
 	public function getNomCommune($codecommune)
 	{
 		foreach ($this->senmask->getNomCommune($codecommune) as $value ) {
@@ -163,7 +186,6 @@ class Welcome extends CI_Controller {
 		}
 		return $nom->nomquartier;
 	}
-
 	public function getNomRegion($coderegion)
 	{
 		return $this->senmask->getNomRegion($coderegion)[0];
@@ -172,18 +194,24 @@ class Welcome extends CI_Controller {
 	{
 		return $this->senmask->getNomDepartement($codedepartement)[0];
 	}
-	public function Admin()
+
+	/* Code Admin */
+	public function connexion()
 	{
-		$this->load->view('admin');
+		$this->load->view('connexion');
 	}
 	public function home_admin()
-	{	
+	{
 		$data = array(
 			'prom_cert' => $this->senmask->prom_cert(),
 			'regions' => $this->senmask->get("region"),
 			'departements' => $this->senmask->get("departement"),
 		);
-		$this->load->view('home_admin',$data);
+		$this->load->view('home_admin', $data);
+	}
+	public function home_init()
+	{
+		$this->load->view('home_init');
 	}
 	public function doLogin()
 	{
@@ -193,32 +221,46 @@ class Welcome extends CI_Controller {
 			'motdepasse' => $this->input->post('password')
 		);
 		$user_data = $this->senmask->login($data);
-		if ($user_data) {
+		if ($user_data) { 
 			foreach ($user_data as $row) {
-				$session_data = array(
-					'user_name' => $row->nom_complet,
-					'logged_in' => TRUE
-				);
-				$this->session->set_userdata($session_data);
-				$this->session->set_flashdata('message', 'succes');
-				redirect('Welcome/home_admin');
+				//print_r($user_data);die;
+				if ($row->niveau == 1) { //Admin
+					$session_data = array(
+						'user_name' => $row->nom_complet,
+						'logged_in' => TRUE
+					);
+					$session_data['niveau'] = 1;
+					$this->session->set_userdata($session_data);
+					$this->session->set_flashdata('message', 'succes');
+					redirect('Welcome/home_admin');
+				}else { //Initiateur
+					$session_data = array(
+						'user_name' => $row->prom_init,
+						'logged_in' => TRUE
+					);
+					$session_data['niveau'] = 0;
+					$this->session->set_userdata($session_data);
+					$this->session->set_flashdata('message', 'succes');
+					redirect('Welcome/home_init'); 
+				}
+				
 			}
 		} else {
 			$this->session->set_flashdata('message', 'wrong');
-			redirect('Welcome/admin');
+			redirect('Welcome/connexion');
 		}
 	}
 	public function logout()
 	{
 		$this->session->unset_userdata('user_name');
 		$this->session->unset_userdata('logged_in');
+		$this->session->unset_userdata('niveau');
 		$this->session->sess_destroy();
 
 		$this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
 		$this->output->set_header("Pragma: no-cache");
-		redirect('Welcome/admin');
+		redirect('Welcome/connexion');
 	}
-
 	public function certifier($id)
 	{
 		$this->senmask->certifier($id);
