@@ -10,25 +10,45 @@
             
         }
 
-        public function publier($data)
+        public function publier($data, $photo1, $photo2, $photo3)
         {
             $user = $this->db->get_where('initiative',array("num_tel" => $data['num_tel']));
             
             if ($user->num_rows() == 0) {//jamais pub
+                $this->db->trans_start();
+               
                 if ($this->db->insert('initiative',$data)) {
                     $this->session->set_flashdata('message', 'insc_succed');
-                    return true;
+                    if($this->db->insert('galerie',$photo1)){
+                        $this->session->set_flashdata('message', 'insc_succed');
+                    }
+                    if($this->db->insert('galerie',$photo2)){
+                        $this->session->set_flashdata('message', 'insc_succed');
+                    }
+                    if($this->db->insert('galerie',$photo3)){
+                        $this->session->set_flashdata('message', 'insc_succed');
+                    }
+                
+                $this->db->trans_complete();
+                return true;
+
                 }else{
                     $this->session->set_flashdata('message', 'insc_error');
                     redirect('Welcome/publier');
                 }
             }else{ // Une fois pub alors undate
-		$this->db->where('num_tel',$data['num_tel']);
+		        $this->db->where('num_tel',$data['num_tel']);
                 $this->db->update('initiative',$data);
                 $this->session->set_flashdata('message', 'updated');
                 return true;
             }
 
+        }
+
+        public function getAllImages()
+        {
+            $q = $this->db->get('galerie');
+            return $q;
         }
 
         public function get($table)

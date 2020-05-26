@@ -23,7 +23,7 @@
                         <li class="tab-content tab-content-<?php echo ++$i;
                                                             if ($i != 1) { ?> typography <?php } ?> ">
                             <div class="container">
-                                <div class="row">
+                               <!-- <div class="row">
                                     <?php foreach ($promoteurs as $promoteur) { ?>
                                         <?php if ($promoteur->id_departement == $dep->codedepartement) {
                                             $j++ ?>
@@ -79,7 +79,60 @@
                                     <?php if ($j == 0) { ?>
                                         <img src="<?php echo base_url(); ?>assets/img/album/no_dist.png" style="width: -webkit-fill-available;">
                                     <?php } ?>
+                                </div>-->
+                                <br>
+                                <div class="card bg-light">
+                                <?php if ($j != 0) { ?>
+                                    <h4 class="card-title mt-3 text-center">Liste des distributeurs de <?php echo $dep->nomdepartement ?>  </h4>
+                                   <?php } ?>
+                                    <p class="divider-text"></p>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Prénom Nom</th>
+                                                <th scope="col">Commune / Quartier</th>
+                                                <th scope="col">Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                        <?php foreach ($promoteurs as $promoteur) { ?>
+                                        <?php if ($promoteur->id_departement == $dep->codedepartement) {
+                                            $j++ ?>
+                                            <tr>
+                                                 <th scope="row"><?php echo $promoteur->prom_init ?></th>
+                                                 <th>
+                                                 <?php
+                                                            foreach ($communes as $commune) {
+                                                                if ($commune->codecommune == substr($promoteur->codeqrt, 0, 8)) {
+                                                                    echo $commune->nomcommune;
+                                                                } ?>
+                                                            <?php }
+                                                            ?>
+                                                            /
+                                                            <?php
+                                                            foreach ($quartiers as $quartier) {
+                                                                if ($quartier->codequartier == $promoteur->codeqrt) {
+                                                                    echo $quartier->nomquartier;
+                                                                } ?>
+                                                            <?php }
+                                                            ?>
+                                                 </th>
+                                                 <th>
+                                                 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal<?php echo $promoteur->num_tel ?>">
+                                                    <i class=" fa fa-eye"></i>
+                                                </button>
+                                                 </th>
+                                            </tr>
+                                            
+                                        <?php }?>
+                                        <?php }?>
+                                        <?php if ($j == 0) { ?>
+                                        <img src="<?php echo base_url(); ?>assets/img/album/no_dist.png" style="width: -webkit-fill-available;">
+                                        <?php } ?>
+                                        </tbody>
+                                    </table>
                                 </div>
+
                             </div>
                         </li>
 
@@ -89,8 +142,9 @@
                     </li>
                 </ul>
             </div>
-
+           
         </div>
+        
     </section>
     <?php $this->load->view('footer'); ?>
 </body>

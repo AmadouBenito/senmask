@@ -41,6 +41,8 @@ class Welcome extends CI_Controller {
 			'departements' => $this->senmask->getDepartementById($code_region),
 			'communes' => $this->senmask->getCommuneById($code_region),
 			'quartiers' => $this->senmask->getQuartierById($code_region),
+			'images' => $this->senmask->getAllImages(),
+			'nb_Image' => $this->senmask->getAllImages()->num_rows(), 
 		);
 		$this->load->view('stocks_reg',$data);
 	}
@@ -109,24 +111,34 @@ class Welcome extends CI_Controller {
                       redirect('welcome/publier');
 		} else {
 			$fileData = $this->upload->data();
-			$data_user['photo'] = $fileData['file_name'];
+			$data_image1 = array (
+				"photo" => $fileData['file_name'],
+				"initiative_id_init" => $this->input->post("numero_tel"),
+			);
+
 		}
 
 		if (!$this->upload->do_upload('photo2')) {
 			$error = array('error' => $this->upload->display_errors());
 		} else {
 			$fileData = $this->upload->data();
-			$data_user['photo2'] = $fileData['file_name'];
+			$data_image2 = array (
+				"photo" => $fileData['file_name'],
+				"initiative_id_init" => $this->input->post("numero_tel"),
+			);
 		}
 		if (!$this->upload->do_upload('photo3')) {
 			$error = array('error' => $this->upload->display_errors());
 		} else {
 			$fileData = $this->upload->data();
-			$data_user['photo3'] = $fileData['file_name'];
+			$data_image3 = array (
+				"photo" => $fileData['file_name'],
+				"initiative_id_init" => $this->input->post("numero_tel"),
+			);
 		}
 		/* print_r($data_user);
 		die; */
-		$insrt = $this->senmask->publier($data_user);
+		$insrt = $this->senmask->publier($data_user, $data_image1, $data_image2, $data_image3);
 		if ($insrt) {
 			$this->session->set_flashdata('message', 'ajout_succed');
 			$reg = $this->input->post("region");
