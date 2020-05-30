@@ -31,6 +31,10 @@
 
         }
 
+        public function insert_photo($data)
+        {
+            return $this->db->insert('galerie',$data);
+        }
         public function get($table)
         {
             $query = $this->db->get($table);
