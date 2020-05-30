@@ -42,7 +42,7 @@ foreach ($regions as $region) {
             <div class="row h-100 align-items-center justify-content-center text-center">
                 <div class="col-lg-10 align-self-end">
                     <h1 class="text-uppercase text-white font-weight-bold">Liste des distibuteurs de masques dans la region de <br>
-                        <span style="color: #f4623a"><?php echo $nom_reg ?></span><br>
+                        <span style="color: #FEAC02"><?php echo $nom_reg ?></span><br>
                     </h1>
                     <hr class="divider my-4" />
                 </div>

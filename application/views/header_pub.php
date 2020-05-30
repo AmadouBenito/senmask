@@ -41,7 +41,7 @@
         <div class="row h-100 align-items-center justify-content-center text-center">
             <div class="col-lg-10 align-self-end">
                 <h1 class="text-uppercase text-white font-weight-bold">
-                    Remplissez ce formulaire pour créer votre boutique <br><span style="color: #f4623a"> et ainsi faire la gestion de votre stock et de vos commandes</span><br>
+                    Remplissez ce formulaire pour créer votre boutique <br><span style="color: #FEAC02"> et ainsi faire la gestion de votre stock et de vos commandes</span><br>
                 </h1>
                 <hr class="divider my-4" />
             </div>

@@ -22,7 +22,7 @@
     transition:fill .3s
 }
 .map__image .is-active path{
-    fill:#f4623a
+    fill:#FEAC02
 }
 .map__list{
     float:right;
@@ -46,7 +46,7 @@
 .map__list a.is-active{
     color:#f4f4f4;
     border-radius: 10px;
-    background-color:#f4623a
+    background-color:#FEAC02
 }
 @media screen and (max-width:100%){
 
@@ -262,7 +262,7 @@
 
 .pcss3t>label:hover {
     background: #f2f2f2;
-    color: #f4623a;
+    color: #FEAC02;
 }
 
 .pcss3t>input:checked+label {
@@ -285,7 +285,7 @@
 .pcss3t-theme-1>label {
 	margin: 0 5px 5px 0;
 	border-radius: 5px;
-	background: #f4623a;
+	background: #FEAC02;
 	box-shadow: 0 2px rgba(0, 0, 0, 0.2);
 	color: #e5e5e5;
 	opacity: 0.8;
@@ -301,7 +301,7 @@
 	padding-bottom: 5px;
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
-	color: #f4623a;
+	color: #FEAC02;
 	opacity: 1;
 }
 
@@ -399,7 +399,7 @@
 	border-bottom-left-radius: 10px;
 	animation-name: example;
 	animation-duration: 0.25s;
-	border-left: 8px solid #f4623a;
+	border-left: 8px solid #FEAC02;
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
 	0 10px 10px rgba(0, 0, 0, 0.22);
 }
