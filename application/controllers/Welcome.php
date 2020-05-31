@@ -42,7 +42,7 @@ class Welcome extends CI_Controller {
 			'communes' => $this->senmask->getCommuneById($code_region),
 			'quartiers' => $this->senmask->getQuartierById($code_region),
 			'images' => $this->senmask->getAllImages(),
-			'nb_Image' => $this->senmask->getAllImages()->num_rows(), 
+			//'nb_Image' => $this->senmask->getAllImages()->num_rows(), 
 		);
 		$this->load->view('stocks_reg',$data);
 	}
@@ -126,9 +126,11 @@ class Welcome extends CI_Controller {
 		} */
 	}
 
+	
 	public function doPublier()
 	{ 
 		$format = "Y-m-d H:i:s";
+		
 		$data_user = array(
 			"prom_init" => $this->input->post("promoteur"),
 			"num_tel" => $this->input->post("numero_tel"),
@@ -156,17 +158,29 @@ class Welcome extends CI_Controller {
 		} else {
 			$fileData = $this->upload->data();
 			$data_user['certificat'] = $fileData['file_name'];
+		}
+
+		$data_image = array(
+			"initiative_id_init" => $this->input->post("numero_tel"),
+			"prix" => $this->input->post("price"),
+		);
+		if (!$this->upload->do_upload('photo')) {
+			$error = array('error' => $this->upload->display_errors());
+		} else {
+			$fileData = $this->upload->data();
+			$data_image['photo'] = $fileData['file_name'];
 		}	
+	
 
 		/* print_r($data_user);
 		die; */
 
-		$insrt = $this->senmask->publier($data_user);
+		$insrt = $this->senmask->publier($data_user,$data_image);
 		if ($insrt) {
 			$this->session->set_flashdata('message', 'ajout_succed');
 			/* $reg = $this->input->post("region"); */
 			//redirect("welcome/region/$reg");
-			redirect('welcome/connexion');
+			redirect('welcome/doLogin');
 		}else {
 			$this->session->set_flashdata('message', 'ajout_failed');
 			redirect('welcome/publier');
@@ -209,15 +223,20 @@ class Welcome extends CI_Controller {
 		);
 		$this->load->view('home_admin', $data);
 	}
-	public function home_init()
+	public function home_init($numero)
 	{
-		$this->load->view('home_init');
+		$user_info = array(
+			'commandes' =>  $this->senmask->getCommandesByNum_tel($numero),
+			'images' =>  $this->senmask->getImagesByNum_tel($numero),
+			'profil' =>  $this->senmask->getOneInit($numero),
+		);
+		$this->load->view('home_init',$user_info);
 	}
 	public function doLogin()
 	{
 		$session_data = array();
 		$data = array(
-			'user_login' => $this->input->post('login'),
+			'user_login' => $this->input->post('numero_tel'),
 			'motdepasse' => $this->input->post('password')
 		);
 		$user_data = $this->senmask->login($data);
@@ -241,7 +260,8 @@ class Welcome extends CI_Controller {
 					$session_data['niveau'] = 0;
 					$this->session->set_userdata($session_data);
 					$this->session->set_flashdata('message', 'succes');
-					redirect('Welcome/home_init'); 
+					$num = $this->input->post('numero_tel');
+					redirect("Welcome/home_init/$num"); 
 				}
 				
 			}

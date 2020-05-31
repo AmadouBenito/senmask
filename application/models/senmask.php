@@ -10,26 +10,22 @@
             
         }
 
-        public function publier($data, $photo1, $photo2, $photo3)
+        public function publier($data, $data_image)
         {
             $user = $this->db->get_where('initiative',array("num_tel" => $data['num_tel']));
             
             if ($user->num_rows() == 0) {//jamais pub
+                //debut transaction
                 $this->db->trans_start();
                
                 if ($this->db->insert('initiative',$data)) {
                     $this->session->set_flashdata('message', 'insc_succed');
-                    if($this->db->insert('galerie',$photo1)){
-                        $this->session->set_flashdata('message', 'insc_succed');
-                    }
-                    if($this->db->insert('galerie',$photo2)){
-                        $this->session->set_flashdata('message', 'insc_succed');
-                    }
-                    if($this->db->insert('galerie',$photo3)){
+                    if($this->db->insert('galerie',$data_image)){
                         $this->session->set_flashdata('message', 'insc_succed');
                     }
                 
                 $this->db->trans_complete();
+                //fin transaction
                 return true;
 
                 }else{
@@ -48,10 +44,26 @@
         }
 
         public function getAllImages()
-        {
-            $q = $this->db->get('galerie');
-            return $q;
+        { 
+            $this->db->select('*');
+            $this->db->from('galerie');
+           // $query = $this->db->get('galerie');
+            $query = $this->db->get();
+            return $query->result();
         }
+        public function getCommandesByNum_tel($num){
+            $q = $this->db->get_where('commande',array('initiative_id_init' => $num));
+            return $q->result();
+        }
+        public function getImagesByNum_tel($num){
+            $q = $this->db->get_where('galerie',array('initiative_id_init' => $num));
+            return $q->result();
+        }
+        public function getOneInit($num){
+            $q = $this->db->get_where('initiative',array('num_tel' => $num));
+            return $q->result();
+        }
+
 
         public function get($table)
         {

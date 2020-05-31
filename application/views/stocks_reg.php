@@ -149,9 +149,10 @@
     <?php $this->load->view('footer'); ?>
 </body>
 <?php
-foreach ($promoteurs as $promoteur) {
-    $this->load->view('galery');
-}
+
+    $this->load->view('galery',$data);
+
+
 ?>
 
 </html>
