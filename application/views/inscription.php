@@ -33,15 +33,17 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input required name="password" class="form-control" placeholder="Définissez un mot de passe" type="password">
+                    <input required id="password" name="password" class="form-control" placeholder="Définissez un mot de passe" type="password">
                 </div>
                 <!-- Confirmation Mot de passe -->
+                <div id="msg"></div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input required name="password_conf" class="form-control" placeholder="Confirmez le mot de passe" type="password">
+                    <input required id="password_conf" name="password_conf" class="form-control" placeholder="Confirmez le mot de passe" type="password">
                 </div>
+
                 <!--Region -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -111,8 +113,8 @@
                     <input name="certificat" id="certificat" class="form-control" type="file">
                 </div>
                 <!-- Images masques -->
-                 <div class="form-group input-group" style="margin: unset">
-                    <input class="form-control" placeholder="Mettez les photos de vos masques" type="text" style="border: none !important; background: unset; padding: unset !important">
+                <div class="form-group input-group" style="margin: unset">
+                    <input class="form-control" placeholder="Une photos de masque" type="text" style="border: none !important; background: unset; padding: unset !important">
                 </div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -121,33 +123,20 @@
                     <input required name="photo" id="photo" class="form-control" type="file">
                 </div>
                 <!-- prix masques -->
+                
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-chart-line"></i> </span>
                     </div>
-                    <input required name="price" class="form-control" placeholder="Prix Unitaire" type="number">
+                    <input required name="price" class="form-control" placeholder="Prix unitaire de ce masque" type="number">
                     <select class="custom-select" style="max-width: 90px;">
                         <option selected>Fcfa</option>
-                        <option value="1">Euro</option>
-                        <option value="2">Dollard</option>
                     </select>
-                </div>       
-
-                <!--<div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-image"></i> </span>
-                    </div>
-                    <input name="photo2" id="photo2" class="form-control" type="file">
                 </div>
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-image"></i> </span>
-                    </div>
-                    <input name="photo3" id="photo3" class="form-control" type="file">
-                </div> -->
-                <!--Button -->
+
+                <div id="msg2" class="alert-danger"></div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Suivant <i class="fa fa-arrow-circle-right"></i> </button>
+                    <button id="submit" type="submit" class="btn btn-primary btn-block"> Suivant <i class="fa fa-arrow-circle-right"></i> </button>
                 </div>
                 <?php echo form_close(); ?>
             </article>
@@ -159,6 +148,19 @@
 
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#password_conf").blur(function() {
+            if ($("#password").val() != $("#password_conf").val()) {
+                $("#msg").html("Mots de passe non conformes").css("color", "red");
+                $("#msg2").html("Assurez-vous de mettre les mêmes mots de passe");
+                $("#submit").attr('disabled', true);
+            } else {
+                $("#msg").html("Mots de passe conformes").css("color", "green");
+            }
+        });
+    });
+</script>
 <script>
     $(document).ready(function() {
         $('#region').change(function() {
