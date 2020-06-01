@@ -111,7 +111,7 @@
                     <input name="certificat" id="certificat" class="form-control" type="file">
                 </div>
                 <!-- Images masques -->
-                <!-- <div class="form-group input-group" style="margin: unset">
+                 <div class="form-group input-group" style="margin: unset">
                     <input class="form-control" placeholder="Mettez les photos de vos masques" type="text" style="border: none !important; background: unset; padding: unset !important">
                 </div>
                 <div class="form-group input-group">
@@ -120,7 +120,20 @@
                     </div>
                     <input required name="photo" id="photo" class="form-control" type="file">
                 </div>
+                <!-- prix masques -->
                 <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-chart-line"></i> </span>
+                    </div>
+                    <input required name="price" class="form-control" placeholder="Prix Unitaire" type="number">
+                    <select class="custom-select" style="max-width: 90px;">
+                        <option selected>Fcfa</option>
+                        <option value="1">Euro</option>
+                        <option value="2">Dollard</option>
+                    </select>
+                </div>       
+
+                <!--<div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-image"></i> </span>
                     </div>
