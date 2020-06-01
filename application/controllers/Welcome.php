@@ -82,9 +82,8 @@ class Welcome extends CI_Controller {
 			'upload_path' => "./assets/img/album",
 			'allowed_types' => "gif|jpg|png|jpeg|pdf|PNG|JPG|JPEG",
 			'overwrite' => FALSE,
-			'max_size' => 6000000 // 6MO
+			'max_size' => 6000 // 6MO
 		);
-
 
 		$this->load->library('upload', $config);
 
@@ -92,43 +91,27 @@ class Welcome extends CI_Controller {
 			$error = array('error' => $this->upload->display_errors());
 		} else {
 			$fileData = $this->upload->data();
+
 			$data_photo['photo'] = $fileData['file_name'];
-			/* data */
+			$data_photo['initiative_id_init'] = $this->session->userdata('user_num');
+
 			$ins = $this->Senmask->insert_photo($data_photo);
+			if ($ins) {
+				$this->session->set_flashdata('message', 'ajout_photo_succes');
+				redirect('Welcome/espace_init');
+			}else {
+				$this->session->set_flashdata('message', 'ajout_photo_failled');
+				redirect('Welcome/espace_init');
+			}
 		}	
 
-		/* if (!$this->upload->do_upload('photo')) {
-			$this->session->set_flashdata('message', 'error_photo');
-			redirect('welcome/publier');
-		} else {
-			$fileData = $this->upload->data();
-			$data_image1 = array (
-				"photo" => $fileData['file_name'],
-				"initiative_id_init" => $this->input->post("numero_tel"),
-			);
 
-		}
-
-		if (!$this->upload->do_upload('photo2')) {
-			$error = array('error' => $this->upload->display_errors());
-		} else {
-			$fileData = $this->upload->data();
-			$data_image2 = array (
-				"photo" => $fileData['file_name'],
-				"initiative_id_init" => $this->input->post("numero_tel"),
-			);
-		}
-		if (!$this->upload->do_upload('photo3')) {
-			$error = array('error' => $this->upload->display_errors());
-		} else {
-			$fileData = $this->upload->data();
-			$data_user['photo3'] = $fileData['file_name'];
-		} */
 	}
 
+	public function doPublier() // inscription
 	
-	public function doPublier()
 	{ 
+		/* recuperatrion de parametres */
 		$format = "Y-m-d H:i:s";
 		
 		$data_user = array(
@@ -143,14 +126,13 @@ class Welcome extends CI_Controller {
 			
 		);
 
+		/* recuperation de parametres */
 		$config = array(
 			'upload_path' => "./assets/img/album",
 			'allowed_types' => "gif|jpg|png|jpeg|pdf|PNG|JPG|JPEG",
 			'overwrite' => FALSE,
 			'max_size' => 6000 // 6MO
 		);
-
-
 		$this->load->library('upload', $config);
 
 		if (!$this->upload->do_upload('certificat')) {
@@ -180,7 +162,8 @@ class Welcome extends CI_Controller {
 			$this->session->set_flashdata('message', 'ajout_succed');
 			/* $reg = $this->input->post("region"); */
 			//redirect("welcome/region/$reg");
-			redirect('welcome/doLogin');
+			redirect('welcome/connexion'); // to be change after
+
 		}else {
 			$this->session->set_flashdata('message', 'ajout_failed');
 			redirect('welcome/publier');
@@ -255,6 +238,7 @@ class Welcome extends CI_Controller {
 				}else { //Initiateur
 					$session_data = array(
 						'user_name' => $row->prom_init,
+						'user_num' => $row->num_tel,
 						'logged_in' => TRUE
 					);
 					$session_data['niveau'] = 0;

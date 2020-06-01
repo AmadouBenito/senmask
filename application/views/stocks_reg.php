@@ -31,12 +31,12 @@
                                                 <div class="contact-box center-version">
                                                     <a href="#profile.html">
                                                         <img alt="image" class="img-circle" src="<?php echo base_url(); ?>assets/img/album/<?php echo $promoteur->photo ?>">
-                                                        <h3 class="m-b-xs"><strong style="color: #f4623a"><?php echo $promoteur->prom_init ?></strong></h3>
+                                                        <h3 class="m-b-xs"><strong style="color: #FEAC02"><?php echo $promoteur->prom_init ?></strong></h3>
                                                         <?php if ($promoteur->certifié) { ?>
                                                             <h5 class="m-b-xs"><strong style="color: green"><i class="fa fa-check-circle"></i>Certifié</strong></h5>
                                                         <?php } ?>
                                                         <h6 style="color: #343a40"><i class="fa fa-map-marked"></i>Commune/Quartier</h6>
-                                                        <h5 style="color: #f4623a; text-transform: lowercase">
+                                                        <h5 style="color: #FEAC02; text-transform: lowercase">
                                                             <?php
                                                             foreach ($communes as $commune) {
                                                                 if ($commune->codecommune == substr($promoteur->codeqrt, 0, 8)) {
@@ -54,9 +54,9 @@
                                                             ?>
                                                         </h5>
                                                         <h6 style="color: #343a40"><i class="fas fa-bookmark"></i> Capacité de production</h6>
-                                                        <h5 style="color: #f4623a"><?php echo $promoteur->cap_prod ?></h5>
+                                                        <h5 style="color: #FEAC02"><?php echo $promoteur->cap_prod ?></h5>
                                                         <h6 style="color: #343a40"><i class="fas fa-comment-dollar"></i> Prix unitaire
-                                                            <span style="color: #f4623a"><?php echo $promoteur->prix ?> FCFA</span>
+                                                            <span style="color: #FEAC02"><?php echo $promoteur->prix ?> FCFA</span>
                                                         </h6><br>
                                                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal<?php echo $promoteur->num_tel ?>">
                                                             Voir les masques

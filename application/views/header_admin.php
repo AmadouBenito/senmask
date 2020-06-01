@@ -79,16 +79,16 @@
                 <?php if ($this->session->userdata('logged_in')) { ?>
                     <?php if ($this->session->userdata('niveau') == 1) { ?>
                     <h1 class="text-uppercase text-white font-weight-bold">
-                        Espace d'<span style="color: #f4623a">administration</span><br>
+                        Espace d'<span style="color: #FEAC02">administration</span><br>
                     </h1>
                     <?php } elseif ($this->session->userdata('niveau') == 0) { ?>
                         <h1 class="text-uppercase text-white font-weight-bold">
-                            Espace de gestion des stocks et des commandes de<br><span style="color: #f4623a"><?php echo $this->session->userdata('user_name'); ?></span><br>
+                            Espace de gestion des stocks et des commandes de<br><span style="color: #FEAC02"><?php echo $this->session->userdata('user_name'); ?></span><br>
                         </h1>
                     <?php } ?>
                 <?php } else{ ?>
                     <h1 class="text-uppercase text-white font-weight-bold">
-                        Bienvenue dans votre espace de <br><span style="color: #f4623a">connexion</span><br>
+                        Bienvenue dans votre espace de <br><span style="color: #FEAC02">connexion</span><br>
                     </h1>
                 <?php } ?>
                 <hr class="divider my-4" />

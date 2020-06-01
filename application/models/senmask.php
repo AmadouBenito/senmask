@@ -43,6 +43,12 @@
 
         }
 
+
+        public function insert_photo($data)
+        {
+            return $this->db->insert('galerie',$data);
+        }
+
         public function getAllImages()
         { 
             $this->db->select('*');
@@ -63,8 +69,6 @@
             $q = $this->db->get_where('initiative',array('num_tel' => $num));
             return $q->result();
         }
-
-
         public function get($table)
         {
             $query = $this->db->get($table);
