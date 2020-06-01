@@ -18,7 +18,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input required name="login" class="form-control" placeholder="Numéro de téléphone" type="text">
+                    <input required name="numero_tel" class="form-control" placeholder="Numéro de téléphone" type="text">
                 </div>
                 <!-- Mot de passe -->
                 <div class="form-group input-group">

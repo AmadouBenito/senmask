@@ -18,6 +18,7 @@
     <link href="<?php echo base_url() ?>assets/css/magnific-popup.min.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="<?php echo base_url() ?>assets/css/styles.css" rel="stylesheet" />
+    <link href="<?php echo base_url() ?>assets/css/style2.css" rel="stylesheet" />
     <link href="<?php echo base_url() ?>assets/css/style_map.css" rel="stylesheet" />
     <!-- Font Awesome icons (free version)-->
     <script src="<?php echo base_url() ?>assets/js/scrip_js.js" crossorigin="anonymous"></script>
