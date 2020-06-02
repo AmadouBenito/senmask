@@ -229,7 +229,8 @@ class Welcome extends CI_Controller {
 				if ($row->niveau == 1) { //Admin
 					$session_data = array(
 						'user_name' => $row->nom_complet,
-						'logged_in' => TRUE
+						'logged_in' => TRUE,
+						'niveau' => 1
 					);
 					$session_data['niveau'] = 1;
 					$this->session->set_userdata($session_data);
@@ -239,9 +240,9 @@ class Welcome extends CI_Controller {
 					$session_data = array(
 						'user_name' => $row->prom_init,
 						'user_num' => $row->num_tel,
-						'logged_in' => TRUE
+						'logged_in' => TRUE,
+						'niveau' => 0
 					);
-					$session_data['niveau'] = 0;
 					$this->session->set_userdata($session_data);
 					$this->session->set_flashdata('message', 'succes');
 					$num = $this->input->post('numero_tel');
