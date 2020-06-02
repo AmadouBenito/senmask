@@ -7,10 +7,13 @@
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.3.1
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
+SET SQL_MODE
+= "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT
+= 0;
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone
+= "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -29,18 +32,30 @@ SET time_zone = "+00:00";
 --
 
 DROP TABLE IF EXISTS `commande`;
-CREATE TABLE IF NOT EXISTS `commande` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nb_mask` int(11) NOT NULL,
-  `nom_client` varchar(45) DEFAULT NULL,
-  `num_tel` varchar(45) NOT NULL,
+CREATE TABLE
+IF NOT EXISTS `commande`
+(
+  `id` int
+(11) NOT NULL AUTO_INCREMENT,
+  `nb_mask` int
+(11) NOT NULL,
+  `nom_client` varchar
+(45) DEFAULT NULL,
+  `num_tel` varchar
+(45) NOT NULL,
   `date` datetime DEFAULT NULL,
-  `initiateur_id_init` int(11) NOT NULL,
-  `etat_id` int(11) NOT NULL,
-  `initiative_id_init` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_commande_etat1` (`etat_id`),
-  KEY `fk_commande_initiative1` (`initiative_id_init`)
+  `initiateur_id_init` int
+(11) NOT NULL,
+  `etat_id` int
+(11) NOT NULL,
+  `initiative_id_init` int
+(11) NOT NULL,
+  PRIMARY KEY
+(`id`),
+  KEY `fk_commande_etat1`
+(`etat_id`),
+  KEY `fk_commande_initiative1`
+(`initiative_id_init`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -50,18 +65,27 @@ CREATE TABLE IF NOT EXISTS `commande` (
 --
 
 DROP TABLE IF EXISTS `commune`;
-CREATE TABLE IF NOT EXISTS `commune` (
-  `id` int(11) NOT NULL,
-  `codecommune` varchar(255) DEFAULT NULL,
-  `nomcommune` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE
+IF NOT EXISTS `commune`
+(
+  `id` int
+(11) NOT NULL,
+  `codecommune` varchar
+(255) DEFAULT NULL,
+  `nomcommune` varchar
+(255) DEFAULT NULL,
+  PRIMARY KEY
+(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `commune`
 --
 
-INSERT INTO `commune` (`id`, `codecommune`, `nomcommune`) VALUES
+INSERT INTO `commune` (`
+id`,
+`codecommune
+`, `nomcommune`) VALUES
 (1, '01130111', 'GOREE'),
 (2, '01130112', 'PLATEAU'),
 (3, '01130113', 'MEDINA'),
@@ -622,18 +646,27 @@ INSERT INTO `commune` (`id`, `codecommune`, `nomcommune`) VALUES
 --
 
 DROP TABLE IF EXISTS `departement`;
-CREATE TABLE IF NOT EXISTS `departement` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codedepartement` varchar(255) DEFAULT NULL,
-  `nomdepartement` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE
+IF NOT EXISTS `departement`
+(
+  `id` int
+(11) NOT NULL AUTO_INCREMENT,
+  `codedepartement` varchar
+(255) DEFAULT NULL,
+  `nomdepartement` varchar
+(100) NOT NULL,
+  PRIMARY KEY
+(`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `departement`
 --
 
-INSERT INTO `departement` (`id`, `codedepartement`, `nomdepartement`) VALUES
+INSERT INTO `departement` (`
+id`,
+`codedepartement
+`, `nomdepartement`) VALUES
 (1, '011', 'DAKAR'),
 (2, '012', 'PIKINE'),
 (3, '013', 'RUFISQUE'),
@@ -687,10 +720,15 @@ INSERT INTO `departement` (`id`, `codedepartement`, `nomdepartement`) VALUES
 --
 
 DROP TABLE IF EXISTS `etat`;
-CREATE TABLE IF NOT EXISTS `etat` (
-  `id` int(11) NOT NULL,
-  `libele` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE
+IF NOT EXISTS `etat`
+(
+  `id` int
+(11) NOT NULL,
+  `libele` varchar
+(45) NOT NULL,
+  PRIMARY KEY
+(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -700,12 +738,21 @@ CREATE TABLE IF NOT EXISTS `etat` (
 --
 
 DROP TABLE IF EXISTS `galerie`;
-CREATE TABLE IF NOT EXISTS `galerie` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `photo` varchar(45) NOT NULL,
-  `initiative_id_init` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_galerie_initiative1` (`initiative_id_init`)
+CREATE TABLE
+IF NOT EXISTS `galerie`
+(
+  `id` int
+(11) NOT NULL AUTO_INCREMENT,
+  `photo` varchar
+(45) NOT NULL,
+  `prix` varchar
+(10) NOT NULL,
+  `initiative_id_init` int
+(11) NOT NULL,
+  PRIMARY KEY
+(`id`),
+  KEY `fk_galerie_initiative1`
+(`initiative_id_init`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -715,28 +762,49 @@ CREATE TABLE IF NOT EXISTS `galerie` (
 --
 
 DROP TABLE IF EXISTS `initiative`;
-CREATE TABLE IF NOT EXISTS `initiative` (
-  `id_init` int(11) NOT NULL AUTO_INCREMENT,
-  `prom_init` varchar(100) NOT NULL,
-  `num_tel` int(11) NOT NULL,
-  `id_departement` varchar(22) NOT NULL,
-  `nb_mask_dispo` int(11) DEFAULT NULL,
+CREATE TABLE
+IF NOT EXISTS `initiative`
+(
+  `id_init` int
+(11) NOT NULL AUTO_INCREMENT,
+  `prom_init` varchar
+(100) NOT NULL,
+  `num_tel` int
+(11) NOT NULL,
+  `id_departement` varchar
+(22) NOT NULL,
+  `nb_mask_dispo` int
+(11) DEFAULT NULL,
   `date` datetime NOT NULL,
-  `cap_prod` int(11) DEFAULT NULL,
-  `codeqrt` varchar(100) NOT NULL,
-  `certificat` varchar(1000) DEFAULT NULL,
-  `certifié` tinyint(1) NOT NULL DEFAULT '0',
-  `archivé` tinyint(1) NOT NULL DEFAULT '0',
-  `mdp` varchar(45) NOT NULL,
-  `niveau` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_init`)
+  `cap_prod` int
+(11) DEFAULT NULL,
+  `codeqrt` varchar
+(100) NOT NULL,
+  `certificat` varchar
+(1000) DEFAULT NULL,
+  `certifié` tinyint
+(1) NOT NULL DEFAULT '0',
+  `archivé` tinyint
+(1) NOT NULL DEFAULT '0',
+  `mdp` varchar
+(45) NOT NULL,
+  `niveau` tinyint
+(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY
+(`id_init`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `initiative`
 --
 
-INSERT INTO `initiative` (`id_init`, `prom_init`, `num_tel`, `id_departement`, `nb_mask_dispo`, `date`, `cap_prod`, `codeqrt`, `certificat`, `certifié`, `archivé`, `mdp`, `niveau`) VALUES
+INSERT INTO `initiative` (`
+id_init`,
+`prom_init`,
+`num_tel`,
+`id_departement`,
+`nb_mask_dispo
+`, `date`, `cap_prod`, `codeqrt`, `certificat`, `certifié`, `archivé`, `mdp`, `niveau`) VALUES
 (1, 'Seynaboou Lo', 771234567, '011', 300, '2020-05-25 20:47:18', 1000, '0113011100100', 'Annotation_2020-05-25_171317.jpg', 0, 0, 'e7247759c1633c0f9f1485f3690294a9', 0);
 
 -- --------------------------------------------------------
@@ -746,10 +814,15 @@ INSERT INTO `initiative` (`id_init`, `prom_init`, `num_tel`, `id_departement`, `
 --
 
 DROP TABLE IF EXISTS `objet_init`;
-CREATE TABLE IF NOT EXISTS `objet_init` (
-  `id_objet_init` int(11) NOT NULL AUTO_INCREMENT,
-  `obj_init` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_objet_init`)
+CREATE TABLE
+IF NOT EXISTS `objet_init`
+(
+  `id_objet_init` int
+(11) NOT NULL AUTO_INCREMENT,
+  `obj_init` varchar
+(100) NOT NULL,
+  PRIMARY KEY
+(`id_objet_init`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -759,19 +832,29 @@ CREATE TABLE IF NOT EXISTS `objet_init` (
 --
 
 DROP TABLE IF EXISTS `quartier`;
-CREATE TABLE IF NOT EXISTS `quartier` (
-  `id` int(11) NOT NULL,
-  `codequartier` varchar(255) DEFAULT NULL,
-  `nomquartier` varchar(255) DEFAULT NULL,
-  `milieu` varchar(255) DEFAULT NULL,
-  `type_localite` varchar(255) DEFAULT NULL
+CREATE TABLE
+IF NOT EXISTS `quartier`
+(
+  `id` int
+(11) NOT NULL,
+  `codequartier` varchar
+(255) DEFAULT NULL,
+  `nomquartier` varchar
+(255) DEFAULT NULL,
+  `milieu` varchar
+(255) DEFAULT NULL,
+  `type_localite` varchar
+(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `quartier`
 --
 
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (1, '0113011100100', 'MBAMBARA', 'URBAIN', 'QUARTIER'),
 (2, '0113011100200', 'NDAW RAYON', 'URBAIN', 'QUARTIER'),
 (3, '0113011100300', 'PONTY', 'URBAIN', 'QUARTIER'),
@@ -1576,7 +1659,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (802, '0123013100600', 'CITE SOCABEG', 'RURAL', 'QUARTIER'),
 (803, '0123013100700', 'FALLENE', 'RURAL', 'QUARTIER'),
 (804, '0123013100800', 'FASS THIAROYE (FASS I)', 'RURAL', 'QUARTIER');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (805, '0123013100900', 'GARAGE MBEYENE', 'RURAL', 'QUARTIER'),
 (806, '0123013101000', 'IBRAHIMA NDAO', 'RURAL', 'QUARTIER'),
 (807, '0123013101100', 'IBRAHIMA NGOM', 'RURAL', 'QUARTIER'),
@@ -2390,7 +2476,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (1615, '0212010300300', 'DIEDIEL (DIEGUEL)', 'RURAL', 'VILLAGE'),
 (1616, '0212010300400', 'DJINEA SIBOGOLE', 'RURAL', 'VILLAGE'),
 (1617, '0212010300500', 'DJINEUL', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (1618, '0212010300600', 'DJINIPER', 'RURAL', 'VILLAGE'),
 (1619, '0212010300700', 'KAGNAROU', 'RURAL', 'VILLAGE'),
 (1620, '0212010300701', 'H1 BALIEUNG', 'RURAL', 'HAMEAU'),
@@ -3249,7 +3338,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (2473, '0312010303800', 'NDIARAO', 'RURAL', 'VILLAGE'),
 (2474, '0312010303900', 'NDIARIGNE', 'RURAL', 'VILLAGE'),
 (2475, '0312010304000', 'NDIARNO RIKADJI I', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (2476, '0312010304100', 'NDIARNO RIKADJI II', 'RURAL', 'VILLAGE'),
 (2477, '0312010304101', 'H1 KEUR YOMBO DIOUF', 'RURAL', 'HAMEAU'),
 (2478, '0312010304200', 'NDIAYE DANKH', 'RURAL', 'VILLAGE'),
@@ -4083,7 +4175,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (3306, '0322010500600', 'GOUYE NDIAYE', 'RURAL', 'VILLAGE'),
 (3307, '0322010500700', 'KEDIAO', 'RURAL', 'VILLAGE'),
 (3308, '0322010500800', 'KEUR MBAYE ISSEU', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (3309, '0322010500801', 'H1 KEUR ABLAYE SARR', 'RURAL', 'HAMEAU'),
 (3310, '0322010500900', 'KHEUL', 'RURAL', 'VILLAGE'),
 (3311, '0322010501000', 'KHOUPOYE', 'RURAL', 'VILLAGE'),
@@ -4911,7 +5006,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (4133, '0332020200603', 'H4 KEUR NDIAGA GUEYE', 'RURAL', 'HAMEAU'),
 (4134, '0332020200700', 'KOBA', 'RURAL', 'VILLAGE'),
 (4135, '0332020200800', 'LAOUNIANDE', 'URBAIN', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (4136, '0332020200900', 'LOUGOUL', 'URBAIN', 'VILLAGE'),
 (4137, '0332020200901', 'H1 DAARA HAMDY KHADY FALL', 'URBAIN', 'HAMEAU'),
 (4138, '0332020200902', 'H1 KEUR ARONA BA', 'URBAIN', 'HAMEAU'),
@@ -5730,7 +5828,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (4951, '0422010100203', 'H11 WOBA', 'RURAL', 'HAMEAU'),
 (4952, '0422010100204', 'H12 LATOL', 'RURAL', 'HAMEAU'),
 (4953, '0422010100205', 'H13 GAZELLE MABOUBE', 'RURAL', 'HAMEAU');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (4954, '0422010100206', 'H14 LAO LAO TOROBES', 'RURAL', 'HAMEAU'),
 (4955, '0422010100207', 'H15 LAO LAO YOUF YOUF', 'RURAL', 'HAMEAU'),
 (4956, '0422010100208', 'H16 LAO LAO SIRNABE', 'RURAL', 'HAMEAU'),
@@ -6550,7 +6651,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (5770, '0422040200821', 'H22 BOMBODE OURO DARRA', 'RURAL', 'HAMEAU'),
 (5771, '0422040200822', 'H22 MBELOGNE II', 'RURAL', 'HAMEAU'),
 (5772, '0422040200823', 'H23 MBELOGNE III', 'RURAL', 'HAMEAU');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (5773, '0422040200824', 'H24 FORAGE BOMBODE', 'RURAL', 'HAMEAU'),
 (5774, '0422040200825', 'H24 KADIOGNE II', 'RURAL', 'HAMEAU'),
 (5775, '0422040200826', 'H25 KADIOGNE I', 'RURAL', 'HAMEAU'),
@@ -7366,7 +7470,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (6585, '0522010106600', 'SINTHIOU PAGNATE', 'RURAL', 'VILLAGE'),
 (6586, '0522010106601', 'H1 DIAMVELLY', 'URBAIN', 'HAMEAU'),
 (6587, '0522010106700', 'SINTHIOU PAGNATE DEMBA DJIBEL (PAGNATE MBALBE)', 'URBAIN', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (6588, '0522010106800', 'SINTHIOU PAGNATE GOUNDO (SARE SYLLI)', 'URBAIN', 'VILLAGE'),
 (6589, '0522010106900', 'SINTHIOU PAGNATE MOUNDJI', 'URBAIN', 'VILLAGE'),
 (6590, '0522010106901', 'H1 SARE DEMBA', 'URBAIN', 'HAMEAU'),
@@ -8149,7 +8256,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (7367, '0532010301700', 'SINTHIOU NGUIDIVOL', 'RURAL', 'VILLAGE'),
 (7368, '0532010301701', 'H1 VELINGARA', 'RURAL', 'HAMEAU'),
 (7369, '0532010301800', 'SIRACOROBOUGOU', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (7370, '0532010301900', 'TABANDING', 'RURAL', 'VILLAGE'),
 (7371, '0532010302000', 'TIVAOUANE (KROUME KOUPE)', 'RURAL', 'VILLAGE'),
 (7372, '0532010302100', 'TOUBA NAOUDE (KOWEIT CITY)', 'RURAL', 'VILLAGE'),
@@ -8958,7 +9068,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (8175, '0542020400902', 'H2 NDIAREME THIAMENE', 'RURAL', 'HAMEAU'),
 (8176, '0542020400903', 'H3 DARAA TOUBA KHELCOM', 'RURAL', 'HAMEAU'),
 (8177, '0542020401000', 'DAROU NAHIM (BOGUEL BOFFE)', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (8178, '0542020401100', 'DAROU RAHMANE (PETEL OUOLOF)', 'RURAL', 'VILLAGE'),
 (8179, '0542020401200', 'DAROU SALAM I', 'RURAL', 'VILLAGE'),
 (8180, '0542020401201', 'H1 DAROU SALAM BELEL', 'RURAL', 'HAMEAU'),
@@ -9770,7 +9883,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (8986, '0612030301300', 'KEUR COUMBA DAGA', 'RURAL', 'VILLAGE'),
 (8987, '0612030301301', 'H1 KEUR SABOLY', 'RURAL', 'HAMEAU'),
 (8988, '0612030301302', 'H2 KEUR LAM', 'RURAL', 'HAMEAU');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (8989, '0612030301303', 'H3 KEUR WALY SENE', 'RURAL', 'HAMEAU'),
 (8990, '0612030301304', 'H4 KEUR DIERY GANDIAYE', 'RURAL', 'HAMEAU'),
 (8991, '0612030301400', 'KEUR GALOUP', 'RURAL', 'VILLAGE'),
@@ -10588,7 +10704,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (9803, '0632010301603', 'H3 KEUR PATHE', 'RURAL', 'HAMEAU'),
 (9804, '0632010301604', 'H3 MBAFAYE', 'RURAL', 'HAMEAU'),
 (9805, '0632010301605', 'H4 NGER DIOUF', 'RURAL', 'HAMEAU');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (9806, '0632010301700', 'NGOLOUM MACK', 'RURAL', 'VILLAGE'),
 (9807, '0632010301701', 'H2 MBOSS NGOLOUM', 'RURAL', 'HAMEAU'),
 (9808, '0632010301800', 'NGOLOUM NDOFFANE', 'RURAL', 'VILLAGE'),
@@ -11404,7 +11523,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (10618, '0712030101203', 'H3 SINTHIOU KEITA', 'RURAL', 'HAMEAU'),
 (10619, '0712030101204', 'H4 NIANING GOREE', 'RURAL', 'HAMEAU'),
 (10620, '0712030101205', 'H5 PEULHGA GOUREL', 'RURAL', 'HAMEAU');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (10621, '0712030101300', 'NIANING SANTHIE (NIANING RESIDENCE)', 'RURAL', 'VILLAGE'),
 (10622, '0712030101400', 'POINTE SARENE', 'RURAL', 'VILLAGE'),
 (10623, '0712030101401', 'H1 KEUR NDOUDY BA', 'RURAL', 'HAMEAU'),
@@ -12222,7 +12344,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (11435, '0722030301404', 'H4 HLM', 'RURAL', 'HAMEAU'),
 (11436, '0722030301500', 'LELO OUOLOF', 'RURAL', 'VILLAGE'),
 (11437, '0722030301501', 'H1 SOUTENANG', 'RURAL', 'HAMEAU');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (11438, '0722030301600', 'LELO SERERE', 'RURAL', 'VILLAGE'),
 (11439, '0722030301601', 'H1 TOUGOUNY WOLOF', 'RURAL', 'HAMEAU'),
 (11440, '0722030301602', 'H3 BOKHTOL', 'RURAL', 'HAMEAU'),
@@ -13047,7 +13172,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (12259, '0732030101400', 'GOUYE DAGUE OUOLOF', 'RURAL', 'VILLAGE'),
 (12260, '0732030101401', 'H1 ADJI BA', 'RURAL', 'HAMEAU'),
 (12261, '0732030101402', 'H2 GOUYE DAGUE PEULH', 'RURAL', 'HAMEAU');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (12262, '0732030101500', 'KEUR DETHIE', 'RURAL', 'VILLAGE'),
 (12263, '0732030101600', 'KEUR FARY OUOLOF', 'RURAL', 'VILLAGE'),
 (12264, '0732030101700', 'KEUR GALLO II', 'URBAIN', 'VILLAGE'),
@@ -13873,7 +14001,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (13084, '0812010403500', 'TAYSIR', 'RURAL', 'VILLAGE'),
 (13085, '0812010403501', 'H1 NGOULE', 'RURAL', 'HAMEAU'),
 (13086, '0812010403600', 'TEUMB OUOLOF', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (13087, '0812010403700', 'TEUMB PEULH', 'RURAL', 'VILLAGE'),
 (13088, '0812010500100', 'ALAHOUWY', 'RURAL', 'VILLAGE'),
 (13089, '0812010500200', 'BOUNDOU BABAREL', 'RURAL', 'VILLAGE'),
@@ -14688,7 +14819,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (13898, '0821030000400', 'THIARENE', 'RURAL', 'QUARTIER'),
 (13899, '0822010100100', 'BARKEDJI', 'RURAL', 'VILLAGE'),
 (13900, '0822010100200', 'BARKEDJI MAURE', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (13901, '0822010100300', 'BELEL BISNABE', 'RURAL', 'VILLAGE'),
 (13902, '0822010100400', 'BELEL THIABOULY', 'RURAL', 'VILLAGE'),
 (13903, '0822010100401', 'H1 BELEL BARKEDJI', 'RURAL', 'HAMEAU'),
@@ -15500,7 +15634,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (14709, '0822040102700', 'KOILY MBARA MAURE', 'RURAL', 'VILLAGE'),
 (14710, '0822040102800', 'KOILY MBARA PEULH', 'RURAL', 'VILLAGE'),
 (14711, '0822040102900', 'KOYLI PEGNA PEULH (KEUR TIEDO SIRA)', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (14712, '0822040103000', 'KOYLOGNE MBAPP', 'RURAL', 'VILLAGE'),
 (14713, '0822040103100', 'KOYLOGNE PAMPI I', 'RURAL', 'VILLAGE'),
 (14714, '0822040103200', 'KOYLOGNE PAMPI II', 'RURAL', 'VILLAGE'),
@@ -16315,7 +16452,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (15523, '0832030102301', 'H1 DAROU', 'RURAL', 'HAMEAU'),
 (15524, '0832030102302', 'H2 PEULGA', 'RURAL', 'HAMEAU'),
 (15525, '0832030102400', 'NDAME KEUR GUIRY', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (15526, '0832030102401', 'H1 KEUR DJIBY SOW', 'RURAL', 'HAMEAU'),
 (15527, '0832030102402', 'H2 KEUR MODOU NIASS (RADIO)', 'RURAL', 'HAMEAU'),
 (15528, '0832030102500', 'NDANGOUR NDIAYE', 'URBAIN', 'VILLAGE'),
@@ -17132,7 +17272,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (16339, '0912010400604', 'H4 OLALA', 'RURAL', 'HAMEAU'),
 (16340, '0912010400700', 'FAMB', 'RURAL', 'VILLAGE'),
 (16341, '0912010400800', 'FANDANE', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (16342, '0912010400801', 'H2 NDOUR NDOUR', 'RURAL', 'HAMEAU'),
 (16343, '0912010400900', 'GOUNDIAYE', 'RURAL', 'VILLAGE'),
 (16344, '0912010400901', 'H1 GOUNDIAYE I', 'RURAL', 'HAMEAU'),
@@ -17959,7 +18102,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (17165, '0922010502900', 'NDIANKHA YOUSSOUFA', 'RURAL', 'VILLAGE'),
 (17166, '0922010503000', 'NDIOBE THIANDA(NDIOBENE MARAME DIOP)', 'RURAL', 'VILLAGE'),
 (17167, '0922010503100', 'NDIOURBEL', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (17168, '0922010503200', 'NIANENE', 'RURAL', 'VILLAGE'),
 (17169, '0922010503300', 'NIASSENE SAMB', 'RURAL', 'VILLAGE'),
 (17170, '0922010503301', 'H1 NIASSENE SANTHIE', 'RURAL', 'HAMEAU'),
@@ -18769,7 +18915,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (17974, '1012010301200', 'FANKA BANTANG', 'URBAIN', 'VILLAGE'),
 (17975, '1012010301300', 'HAMDALLAYE DIEGA', 'URBAIN', 'VILLAGE'),
 (17976, '1012010301400', 'KANKONDRON', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (17977, '1012010301500', 'KESSEL COUNDA', 'RURAL', 'VILLAGE'),
 (17978, '1012010301600', 'KONTE COUNDA', 'RURAL', 'VILLAGE'),
 (17979, '1012010301700', 'KOUMBIDIA SARE SEYNI', 'RURAL', 'VILLAGE'),
@@ -19534,7 +19683,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (18738, '1022010301000', 'MEDINA GOUNASS', 'RURAL', 'VILLAGE'),
 (18739, '1022010301001', 'H1 DAMADE', 'RURAL', 'HAMEAU'),
 (18740, '1022010301002', 'H1 OUNFANY', 'RURAL', 'HAMEAU');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (18741, '1022010301100', 'MEDINA PAKANE', 'RURAL', 'VILLAGE'),
 (18742, '1022010301200', 'MEDINA TOUAT', 'RURAL', 'VILLAGE'),
 (18743, '1022010301300', 'MISSIRAH KOUBA', 'RURAL', 'VILLAGE'),
@@ -20315,7 +20467,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (19518, '1032020203300', 'SINTHIANG ADAMA', 'RURAL', 'VILLAGE'),
 (19519, '1032020203400', 'SINTHIANG BOCAR', 'RURAL', 'VILLAGE'),
 (19520, '1032020203500', 'SINTHIANG LAMA', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (19521, '1032020203600', 'SOSSOUTO', 'RURAL', 'VILLAGE'),
 (19522, '1032020203700', 'TAMASSANKA', 'RURAL', 'VILLAGE'),
 (19523, '1032020203800', 'TAWFEKH SERIGNE LO', 'RURAL', 'VILLAGE'),
@@ -21115,7 +21270,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (20317, '1122010302300', 'PATOUKI ORIENTAL', 'RURAL', 'VILLAGE'),
 (20318, '1122010302301', 'H1 FASS', 'RURAL', 'HAMEAU'),
 (20319, '1122010302400', 'SANGAYEL DIAOUBE', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (20320, '1122010302500', 'SANGAYEL GALOYABE', 'RURAL', 'VILLAGE'),
 (20321, '1122010302600', 'SENDOU', 'RURAL', 'VILLAGE'),
 (20322, '1122010302700', 'SENOYEL DEMBA SALLY', 'RURAL', 'VILLAGE'),
@@ -21920,7 +22078,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (21121, '1212020300500', 'DAROU SALAM', 'RURAL', 'VILLAGE'),
 (21122, '1212020300600', 'DIAMA SENEGAL', 'URBAIN', 'VILLAGE'),
 (21123, '1212020300700', 'IDA MBAYENE', 'URBAIN', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (21124, '1212020300800', 'KELIMANE GOUYE', 'RURAL', 'VILLAGE'),
 (21125, '1212020300900', 'KEUR ALY FANA', 'RURAL', 'VILLAGE'),
 (21126, '1212020301000', 'KEUR BABOU', 'RURAL', 'VILLAGE'),
@@ -22733,7 +22894,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (21933, '1232030104101', 'H1 LOYENE', 'RURAL', 'HAMEAU'),
 (21934, '1232030104102', 'H2 DIAM DIAM', 'RURAL', 'HAMEAU'),
 (21935, '1232030104103', 'H3 COLE', 'RURAL', 'HAMEAU');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (21936, '1232030104200', 'THIOYENE', 'RURAL', 'VILLAGE'),
 (21937, '1232030104201', 'H1 PEULGA', 'RURAL', 'HAMEAU'),
 (21938, '1232030104300', 'TIVAOUNE SALOUM', 'RURAL', 'VILLAGE'),
@@ -23556,7 +23720,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (22755, '1411010000100', 'HEREMANCONO', 'URBAIN', 'QUARTIER'),
 (22756, '1411010000200', 'JULES COUNDA', 'RURAL', 'QUARTIER'),
 (22757, '1411010000300', 'KABEUMB', 'RURAL', 'QUARTIER');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (22758, '1411010000400', 'MANSACOUNDA', 'RURAL', 'QUARTIER'),
 (22759, '1411010000500', 'MONTAGNE ROUGE', 'RURAL', 'QUARTIER'),
 (22760, '1411010000600', 'MORICOUNDA', 'RURAL', 'QUARTIER'),
@@ -24364,7 +24531,10 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 (23562, '1431040000400', 'MORICOUNDA', 'RURAL', 'QUARTIER'),
 (23563, '1431040000500', 'NEMA', 'RURAL', 'QUARTIER'),
 (23564, '1432010100100', 'ADOUNDOU BRAME', 'RURAL', 'VILLAGE');
-INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_localite`) VALUES
+INSERT INTO `quartier` (`
+id`,
+`codequartier
+`, `nomquartier`, `milieu`, `type_localite`) VALUES
 (23565, '1432010100101', 'H1 TABOUHALO', 'RURAL', 'HAMEAU'),
 (23566, '1432010100200', 'AKINTOU I', 'RURAL', 'VILLAGE'),
 (23567, '1432010100201', 'H1 GRAND DAKAR', 'RURAL', 'HAMEAU'),
@@ -24683,18 +24853,27 @@ INSERT INTO `quartier` (`id`, `codequartier`, `nomquartier`, `milieu`, `type_loc
 --
 
 DROP TABLE IF EXISTS `region`;
-CREATE TABLE IF NOT EXISTS `region` (
-  `id` varchar(255) NOT NULL,
-  `coderegion` varchar(255) DEFAULT NULL,
-  `nomregion` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE
+IF NOT EXISTS `region`
+(
+  `id` varchar
+(255) NOT NULL,
+  `coderegion` varchar
+(255) DEFAULT NULL,
+  `nomregion` varchar
+(255) DEFAULT NULL,
+  PRIMARY KEY
+(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `region`
 --
 
-INSERT INTO `region` (`id`, `coderegion`, `nomregion`) VALUES
+INSERT INTO `region` (`
+id`,
+`coderegion
+`, `nomregion`) VALUES
 ('2', '01', 'DAKAR'),
 ('3', '02', 'ZIGUINCHOR'),
 ('4', '03', 'DIOURBEL'),
@@ -24717,19 +24896,29 @@ INSERT INTO `region` (`id`, `coderegion`, `nomregion`) VALUES
 --
 
 DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `nom_complet` varchar(100) NOT NULL,
-  `user_login` varchar(50) NOT NULL,
-  `motdepasse` varchar(50) NOT NULL,
-  `niveau` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`user_login`)
+CREATE TABLE
+IF NOT EXISTS `users`
+(
+  `nom_complet` varchar
+(100) NOT NULL,
+  `user_login` varchar
+(50) NOT NULL,
+  `motdepasse` varchar
+(50) NOT NULL,
+  `niveau` tinyint
+(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY
+(`user_login`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`nom_complet`, `user_login`, `motdepasse`, `niveau`) VALUES
+INSERT INTO `users` (`
+nom_complet`,
+`user_login
+`, `motdepasse`, `niveau`) VALUES
 ('Sophie DIALLO', 'admin', 'e7247759c1633c0f9f1485f3690294a9', 1),
 ('Ndella Diop', 'Ndella', '4060934ee084cd9ca6131674c09879d9', 1);
 
@@ -24741,14 +24930,26 @@ INSERT INTO `users` (`nom_complet`, `user_login`, `motdepasse`, `niveau`) VALUES
 -- Contraintes pour la table `commande`
 --
 ALTER TABLE `commande`
-  ADD CONSTRAINT `fk_commande_etat1` FOREIGN KEY (`etat_id`) REFERENCES `etat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_commande_initiative1` FOREIGN KEY (`initiative_id_init`) REFERENCES `initiative` (`id_init`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `fk_commande_etat1` FOREIGN KEY
+(`etat_id`) REFERENCES `etat`
+(`id`) ON
+DELETE NO ACTION ON
+UPDATE NO ACTION,
+ADD CONSTRAINT `fk_commande_initiative1` FOREIGN KEY
+(`initiative_id_init`) REFERENCES `initiative`
+(`id_init`) ON
+DELETE NO ACTION ON
+UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `galerie`
 --
 ALTER TABLE `galerie`
-  ADD CONSTRAINT `fk_galerie_initiative1` FOREIGN KEY (`initiative_id_init`) REFERENCES `initiative` (`id_init`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `fk_galerie_initiative1` FOREIGN KEY
+(`initiative_id_init`) REFERENCES `initiative`
+(`id_init`) ON
+DELETE NO ACTION ON
+UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
