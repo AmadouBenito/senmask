@@ -15,8 +15,6 @@
     padding :5%,5% ;
 }
 .myTableCards{
-    
-   
     width: 100%;
 }
 #tab{
@@ -38,4 +36,14 @@
     width: 10%;
     margin-left:45% ;
     margin-right: 45%;
+}
+
+.my_menu{
+    width: 50%;
+}
+
+@media(max-width: 500px){
+    .my_menu {
+    	width:100%;
+    }
 }
