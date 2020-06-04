@@ -29,14 +29,14 @@
                 </div>
                 <div class="container" style="margin-bottom: 3%; height: 40%;">
 					<h4 class="text-center" style="color: lightseagreen;"><?php echo $image->prix; ?> FCFA</h4>
-				    <a href="" type="button" class="container btn btn-primary" style="border-radius: 25px ;">
+				    <a href="<?php echo base_url('index.php/Welcome/deleteImage/'.$image->id); ?>" type="button" class="container btn btn-primary" style="border-radius: 25px ;">
 			        Supprimer
                     </a>
                  </div>
 		    </div> 
         <?php $nb_img++; } ?>
         <?php if( $nb_img < 5 ) {?>
-            <div class="col-md-5 shadow container masque">
+            <div class="col-md-5 shadow container masque" type = "button" data-toggle="modal" data-target="#exampleModalLong">
                 <div class="container" id="AddIcon">
                     <img src="<?php echo base_url(); ?>assets/img/addImage.png" class="d-block w-100" alt="...">
                 </div>

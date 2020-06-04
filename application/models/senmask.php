@@ -43,17 +43,41 @@
 
         }
 
+       /* public function updateStock($data){
+            if($data['num_tel']){
+
+            $this->db->where('num_tel',$data['num_tel']);
+            $this->db->update('initiative',$data);
+            return true;
+            }
+        }*/
+
+        public function updateProfile($data){
+            if($data['num_tel']){
+
+                $this->db->where('num_tel',$data['num_tel']);
+                $this->db->update('initiative',$data);
+                return true;
+                } 
+        }
+
+        public function deleteImage($id){
+
+                $this->db->delete('galerie',['id' => $id]);
+                return true;
+                
+        }
 
         public function insert_photo($data)
         {
-            return $this->db->insert('galerie',$data);
+            $this->db->insert('galerie',$data);
+            return true;
         }
 
         public function getAllImages()
         { 
             $this->db->select('*');
             $this->db->from('galerie');
-           // $query = $this->db->get('galerie');
             $query = $this->db->get();
             return $query->result();
         }

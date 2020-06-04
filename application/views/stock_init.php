@@ -20,17 +20,18 @@
       </div>
       <?php foreach($profil as $profile) {?>
     <div class="modal-body container" style="width: 70%;">
-      
+    <?php echo form_open_multipart('/Welcome/updateStock'); ?>
         <span class="container" style="color: lightseagreen ;">Nombre de masques disponibles</span>
       <div class="form-group input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text" style="color: lightseagreen;"> <i class="fa fa-user"></i> </span>
             </div>
-            <input required name="promoteur" value="<?php echo $profile->nb_mask_dispo ?>" class="form-control" placeholder="Nom complet" type="text">
+            <input required name="stock" type="number" value="<?php echo $profile->nb_mask_dispo ?>" class="form-control" placeholder="Nom complet">
       </div>
       <div class="container" style="width: 50% ;">
-      <button type="button" style="border-radius: 25px ;" style="width: 100% ;" class="btn btn-primary">Mettre à jour</button>
+      <button type="submit" style="border-radius: 25px ;" style="width: 100% ;" class="btn btn-primary">Mettre à jour</button>
       </div>
+      <?php echo form_close(); ?>
       </br>
       </div>
       <?php } ?>

@@ -14,67 +14,11 @@
                     </button>
                 </div>
                 <?php $nb_image = 0 ;?>
-                <?php foreach ($images as $image) {
-                    if($image->initiative_id_init == $promoteur->num_tel )
-                    $nb_image++;
-                }?>
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" style="color: orange;"> <i class="fa fa-image"></i> </span>
-                    </div>
-                    <h5> Photos de Masques <?php echo $nb_image ?></h5>
+                
+                
+              
                 </div>
-                <div class="card w-80 container bg-light shadow-lg myslide">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                   <?php if($nb_image == 1) {?>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <?php } ?>
-                    <?php if($nb_image == 2) {?>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <?php } ?>
-                    <?php if($nb_image == 3) {?>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    <?php } ?>
-                    <?php if($nb_image == 4) {?>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                    <?php } ?>  
-                    <?php if($nb_image == 5) {?>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-                    <?php } ?> 
-                </ol>
-                <?php foreach ($images as $image) {
-                    if($image->initiative_id_init == $promoteur->num_tel ) {?>
-                <div class="carousel-inner">
-                    <div class="carousel-item active container">
-                        <img src="<?php echo base_url(); ?>assets/img/album/<?php echo $image->photo ?>" class="container w-100 imageSlide" alt="...">
-                        
-                   
-                </div>
-                <?php } 
-             } ?>
-             <?php if($nb_image == 0) {?>
-                <h3 style="color:red">ce fournisseurs n'a pas encore d'images de Masques</h3>
-            <?php } ?>    
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+                
                 </div>
                 </div>
 </br>

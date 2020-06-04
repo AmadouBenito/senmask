@@ -75,8 +75,35 @@ class Welcome extends CI_Controller {
 		);
 		$this->load->view('inscription',$data);
 	}
+
+	public function insererImage(){
+
+	}
+
+	public function updateStock(){
+		$data = array(
+			'num_tel' => $this->session->userdata('user_num'),
+			'nb_mask_dispo' => $this->input->post('stock'),
+		);
+		$num = $this->session->userdata('user_num');
+		if($this->senmask->updateProfile($data)){
+			redirect("Welcome/home_init/$num");
+		}
+	}
+
+	public function updateProfile(){
+		$data = array(
+			'prom_init' => $this->input->post('promoteurName'),
+			'num_tel' => $this->session->userdata('user_num'),
+			'cap_prod' => $this->input->post('capacite'),
+		);
+		$num = $this->session->userdata('user_num');
+		if($this->senmask->updateProfile($data)){
+			redirect("Welcome/home_init/$num");
+		}
+	}
 	
-	public function insert_photo($data_photo)
+	public function insert_photo()
 	{
 		$config = array(
 			'upload_path' => "./assets/img/album",
@@ -90,22 +117,38 @@ class Welcome extends CI_Controller {
 		if (!$this->upload->do_upload('photo')) {
 			$error = array('error' => $this->upload->display_errors());
 		} else {
+			$data_photo = array(
+				'initiative_id_init' => $this->session->userdata('user_num'),
+				'prix' => $this->input->post('price'),
+			);
 			$fileData = $this->upload->data();
 
 			$data_photo['photo'] = $fileData['file_name'];
-			$data_photo['initiative_id_init'] = $this->session->userdata('user_num');
-
-			$ins = $this->Senmask->insert_photo($data_photo);
+			
+			$num = $this->session->userdata('user_num');
+			$ins = $this->senmask->insert_photo($data_photo);
 			if ($ins) {
 				$this->session->set_flashdata('message', 'ajout_photo_succes');
-				redirect('Welcome/espace_init');
+				redirect("Welcome/home_init/$num");
 			}else {
 				$this->session->set_flashdata('message', 'ajout_photo_failled');
-				redirect('Welcome/espace_init');
+				redirect("Welcome/home_init/$num");
 			}
-		}	
+		}
 
+	}
 
+	public function deleteImage($id){
+
+		$num = $this->session->userdata('user_num');
+
+		if($this->senmask->deleteImage($id)){
+			$this->session->set_flashdata('message', 'suppression_photo_succes');
+			redirect("Welcome/home_init/$num");
+		}else {
+			$this->session->set_flashdata('message', 'suppression_photo_failled');
+			redirect("Welcome/home_init/$num");
+		}
 	}
 
 	public function doPublier() // inscription
