@@ -102,6 +102,24 @@ class Welcome extends CI_Controller {
 			redirect("Welcome/home_init/$num");
 		}
 	}
+
+	public function commander($num , $id){
+		$commande = array(
+			'id_image' => $id,
+			'initiative_id_init' => $num,
+			'nb_mask' => $this->input->post('nombre'),
+			'nom_client'=> $this->input->post('client'),
+			'num_tel'=> $this->input->post('numero_tel'),
+		);
+		if($this->senmask->commander($commande)){
+			$this->session->set_flashdata('message', 'commande_succes');
+			redirect('welcome/index');
+		}
+		else{
+			$this->session->set_flashdata('message', 'commande_failed');
+			redirect('welcome/index');
+		}
+	}
 	
 	public function insert_photo()
 	{
@@ -212,6 +230,32 @@ class Welcome extends CI_Controller {
 			redirect('welcome/publier');
 		}
 	}
+
+	public function validerCommande($id, $nb){
+		$num = $this->session->userdata('user_num');
+		$nb_mask_dispo = $this->senmask->getStock($num);
+		if($nb_mask_dispo >= $nb){
+			$this->senmask->validerCommande($id);
+			$this->session->set_flashdata('message', 'validation_commande_succes');
+			redirect("Welcome/home_init/$num");
+		}else {
+			$this->session->set_flashdata('message', 'validation_commande_failed');
+			redirect("Welcome/home_init/$num");
+		}
+
+	}
+	public function declinerCommande($id){
+		$num = $this->session->userdata('user_num');
+		if($this->senmask->declinerCommande($id)){
+		$this->session->set_flashdata('message', 'decliner_commande_succes');
+			redirect("Welcome/home_init/$num");
+		}else {
+			$this->session->set_flashdata('message', 'decliner_commande_failed');
+			redirect("Welcome/home_init/$num");
+		}
+
+	}
+
 	public function getNomCommune($codecommune)
 	{
 		foreach ($this->senmask->getNomCommune($codecommune) as $value ) {

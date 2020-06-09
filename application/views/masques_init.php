@@ -25,12 +25,12 @@
         <?php foreach($images as $image) {?>
             <div class="col-md-5 shadow container masque">
                 <div class="container" style="height: 60%; margin-top :2%; margin-bottom :2%;">
-				<img src="<?php echo base_url(); ?>assets/img/album/<?php echo $image->photo ?>" class="d-block w-100" alt="...">
+				          <img src="<?php echo base_url(); ?>assets/img/album/<?php echo $image->photo ?>" class="d-block w-100" alt="...">
                 </div>
                 <div class="container" style="margin-bottom: 3%; height: 40%;">
-					<h4 class="text-center" style="color: lightseagreen;"><?php echo $image->prix; ?> FCFA</h4>
-				    <a href="<?php echo base_url('index.php/Welcome/deleteImage/'.$image->id); ?>" type="button" class="container btn btn-primary" style="border-radius: 25px ;">
-			        Supprimer
+					          <h4 class="text-center" style="color: lightseagreen;"><?php echo $image->prix; ?> FCFA</h4>
+				            <a href="<?php echo base_url('index.php/Welcome/deleteImage/'.$image->id); ?>" type="button" class="container btn btn-primary" style="border-radius: 25px ;">
+			                Supprimer
                     </a>
                  </div>
 		    </div> 

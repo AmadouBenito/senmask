@@ -81,6 +81,37 @@
             $query = $this->db->get();
             return $query->result();
         }
+
+        public function commander($data){
+            $this->db->insert('commande',$data);
+            return true;
+        }
+        public function getStock($id){
+            $this->db->select('nb_mask_dispo');
+            $this->db->from('initiative');
+            $this->db->where('num_tel', $id);
+            $query = $this->db->get();
+            return $query->result();  
+        }
+
+        public function validerCommande($id){
+            $data = [
+                'etat_id' => '1',
+            ];
+            $this->db->where('id', $id);
+            $this->db->update('commande',$data);
+            return true;
+        }
+
+        public function declinerCommande($id){
+            $data = [
+                'etat_id' => '2',
+            ];
+            $this->db->where('id', $id);
+            $this->db->update('commande',$data);
+            return true;
+        }
+
         public function getCommandesByNum_tel($num){
             $q = $this->db->get_where('commande',array('initiative_id_init' => $num));
             return $q->result();
