@@ -20,19 +20,20 @@
       <div class="modal-body container" style="width: 70%;">
       
           <?php foreach($profil as $profile) {?>
+            <?php echo form_open_multipart('/Welcome/updateProfile'); ?>
         <!-- Utilisateur -->
         <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text" style="color: lightseagreen;"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input required name="promoteur" value="<?php echo $profile->prom_init ?>" class="form-control" placeholder="Nom complet" type="text">
+                    <input required name="promoteurName" value="<?php echo $profile->prom_init ?>" class="form-control" placeholder="Nom complet" type="text">
                 </div>
                 <!-- Numero de telephone -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend ">
                         <span class="input-group-text" style="color: lightseagreen;"> <i class="fa fa-phone"></i> </span>
                     </div>
-                    <input required name="numero_tel" value="<?php echo $profile->num_tel  ?>" class="form-control" placeholder="Numéro de téléphone" type="number">
+                    <input required name="numero_tel" value="<?php echo $profile->num_tel  ?>" class="form-control" placeholder="Numéro de téléphone" type="number" disabled >
                 </div>
                  <!--Capacité de production -->
                  <span class="container" style="color: lightseagreen ;">Capacité de production</span>
@@ -44,8 +45,9 @@
                 </div>
                 </br>
                 <div class="container" style="width: 50% ;">
-                      <button type="button" style="border-radius: 25px ;" style="width: 100% ;" class="btn btn-primary">Mettre à jour</button>
+                      <button type="submit" style="border-radius: 25px ;" style="width: 100% ;" class="btn btn-primary">Mettre à jour</button>
                 </div>
+                <?php echo form_close(); ?>
           </br>
             <?php } ?>
       </div>

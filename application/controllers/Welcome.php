@@ -75,8 +75,53 @@ class Welcome extends CI_Controller {
 		);
 		$this->load->view('inscription',$data);
 	}
+
+	public function insererImage(){
+
+	}
+
+	public function updateStock(){
+		$data = array(
+			'num_tel' => $this->session->userdata('user_num'),
+			'nb_mask_dispo' => $this->input->post('stock'),
+		);
+		$num = $this->session->userdata('user_num');
+		if($this->senmask->updateProfile($data)){
+			redirect("Welcome/home_init/$num");
+		}
+	}
+
+	public function updateProfile(){
+		$data = array(
+			'prom_init' => $this->input->post('promoteurName'),
+			'num_tel' => $this->session->userdata('user_num'),
+			'cap_prod' => $this->input->post('capacite'),
+		);
+		$num = $this->session->userdata('user_num');
+		if($this->senmask->updateProfile($data)){
+			redirect("Welcome/home_init/$num");
+		}
+	}
+
+	public function commander($num , $id){
+		$commande = array(
+			'id_image' => $id,
+			'initiative_id_init' => $num,
+			'nb_mask' => $this->input->post('nombre'),
+			'nom_client'=> $this->input->post('client'),
+			'num_tel'=> $this->input->post('numero_tel'),
+		);
+		if($this->senmask->commander($commande)){
+			$this->session->set_flashdata('message', 'commande_succes');
+			redirect('welcome/index');
+		}
+		else{
+			$this->session->set_flashdata('message', 'commande_failed');
+			redirect('welcome/index');
+		}
+	}
 	
-	public function insert_photo($data_photo)
+	public function insert_photo()
 	{
 		$config = array(
 			'upload_path' => "./assets/img/album",
@@ -90,22 +135,38 @@ class Welcome extends CI_Controller {
 		if (!$this->upload->do_upload('photo')) {
 			$error = array('error' => $this->upload->display_errors());
 		} else {
+			$data_photo = array(
+				'initiative_id_init' => $this->session->userdata('user_num'),
+				'prix' => $this->input->post('price'),
+			);
 			$fileData = $this->upload->data();
 
 			$data_photo['photo'] = $fileData['file_name'];
-			$data_photo['initiative_id_init'] = $this->session->userdata('user_num');
-
-			$ins = $this->Senmask->insert_photo($data_photo);
+			
+			$num = $this->session->userdata('user_num');
+			$ins = $this->senmask->insert_photo($data_photo);
 			if ($ins) {
 				$this->session->set_flashdata('message', 'ajout_photo_succes');
-				redirect('Welcome/espace_init');
+				redirect("Welcome/home_init/$num");
 			}else {
 				$this->session->set_flashdata('message', 'ajout_photo_failled');
-				redirect('Welcome/espace_init');
+				redirect("Welcome/home_init/$num");
 			}
-		}	
+		}
 
+	}
 
+	public function deleteImage($id){
+
+		$num = $this->session->userdata('user_num');
+
+		if($this->senmask->deleteImage($id)){
+			$this->session->set_flashdata('message', 'suppression_photo_succes');
+			redirect("Welcome/home_init/$num");
+		}else {
+			$this->session->set_flashdata('message', 'suppression_photo_failled');
+			redirect("Welcome/home_init/$num");
+		}
 	}
 
 	public function doPublier() // inscription
@@ -169,6 +230,32 @@ class Welcome extends CI_Controller {
 			redirect('welcome/publier');
 		}
 	}
+
+	public function validerCommande($id, $nb){
+		$num = $this->session->userdata('user_num');
+		$nb_mask_dispo = $this->senmask->getStock($num);
+		if($nb_mask_dispo >= $nb){
+			$this->senmask->validerCommande($id);
+			$this->session->set_flashdata('message', 'validation_commande_succes');
+			redirect("Welcome/home_init/$num");
+		}else {
+			$this->session->set_flashdata('message', 'validation_commande_failed');
+			redirect("Welcome/home_init/$num");
+		}
+
+	}
+	public function declinerCommande($id){
+		$num = $this->session->userdata('user_num');
+		if($this->senmask->declinerCommande($id)){
+		$this->session->set_flashdata('message', 'decliner_commande_succes');
+			redirect("Welcome/home_init/$num");
+		}else {
+			$this->session->set_flashdata('message', 'decliner_commande_failed');
+			redirect("Welcome/home_init/$num");
+		}
+
+	}
+
 	public function getNomCommune($codecommune)
 	{
 		foreach ($this->senmask->getNomCommune($codecommune) as $value ) {

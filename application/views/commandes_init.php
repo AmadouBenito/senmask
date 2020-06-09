@@ -25,18 +25,24 @@
   </thead>
   <tbody>
     <?php foreach ($commandes as $commande) {?>
-    <tr>
-      
-      <th scope="row" ><?php echo $commande->nom_client ?></th>
-      <td class="text-center"><?php echo $commande->num_tel ?></td>
-      <td class="text-center"><?php echo $commande->nb_mask ?></td>
-      
-      <td>
-        <button type="button" class="btn btn-danger">Décliner</button>
-        <button type="button" class="btn btn-success">Valider</button>
-      </td>
-    </tr>
-    <?php } ?>
+      <?php if($commande->etat_id == 0) {?>
+        <tr>
+          
+          <th scope="row" ><?php echo $commande->nom_client ?></th>
+          <td class="text-center"><?php echo $commande->num_tel ?></td>
+          <td class="text-center"><?php echo $commande->nb_mask ?></td>
+          
+          <td>
+          <a href="<?php echo base_url('index.php/Welcome/declinerCommande/'.$commande->id); ?>" type="button" class="btn btn-danger">
+                          Decliner
+                        </a>
+            <a href="<?php echo base_url("index.php/Welcome/validerCommande/$commande->id/$commande->nb_mask"); ?>" type="button" class="btn btn-primary">
+                          Valider
+                        </a>
+          </td>
+        </tr>
+    <?php }
+   } ?>
     
   </tbody>
 </table>

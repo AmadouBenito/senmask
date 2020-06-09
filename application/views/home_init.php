@@ -68,7 +68,7 @@ if (!$this->session->userdata('logged_in')) {
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 mb-1">
-                    <div class="        card text-white bg-primary" style="margin: 10px 5% ;" type="button" data-toggle="modal" data-target="#exampleModal">
+                    <div class="card text-white bg-primary" style="margin: 10px 5% ;" type="button" data-toggle="modal" data-target="#exampleModal">
                         <div class="card-body text-center myTableCards">
                             <h4 class="container"> Mon Profil </h4>
                         </div>

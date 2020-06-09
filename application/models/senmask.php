@@ -43,20 +43,75 @@
 
         }
 
+       /* public function updateStock($data){
+            if($data['num_tel']){
+
+            $this->db->where('num_tel',$data['num_tel']);
+            $this->db->update('initiative',$data);
+            return true;
+            }
+        }*/
+
+        public function updateProfile($data){
+            if($data['num_tel']){
+
+                $this->db->where('num_tel',$data['num_tel']);
+                $this->db->update('initiative',$data);
+                return true;
+                } 
+        }
+
+        public function deleteImage($id){
+
+                $this->db->delete('galerie',['id' => $id]);
+                return true;
+                
+        }
 
         public function insert_photo($data)
         {
-            return $this->db->insert('galerie',$data);
+            $this->db->insert('galerie',$data);
+            return true;
         }
 
         public function getAllImages()
         { 
             $this->db->select('*');
             $this->db->from('galerie');
-           // $query = $this->db->get('galerie');
             $query = $this->db->get();
             return $query->result();
         }
+
+        public function commander($data){
+            $this->db->insert('commande',$data);
+            return true;
+        }
+        public function getStock($id){
+            $this->db->select('nb_mask_dispo');
+            $this->db->from('initiative');
+            $this->db->where('num_tel', $id);
+            $query = $this->db->get();
+            return $query->result();  
+        }
+
+        public function validerCommande($id){
+            $data = [
+                'etat_id' => '1',
+            ];
+            $this->db->where('id', $id);
+            $this->db->update('commande',$data);
+            return true;
+        }
+
+        public function declinerCommande($id){
+            $data = [
+                'etat_id' => '2',
+            ];
+            $this->db->where('id', $id);
+            $this->db->update('commande',$data);
+            return true;
+        }
+
         public function getCommandesByNum_tel($num){
             $q = $this->db->get_where('commande',array('initiative_id_init' => $num));
             return $q->result();
