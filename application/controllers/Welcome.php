@@ -220,16 +220,24 @@ class Welcome extends CI_Controller {
 
 		$insrt = $this->senmask->publier($data_user,$data_image);
 		if ($insrt) {
-			$this->session->set_flashdata('message', 'ajout_succed');
-			/* $reg = $this->input->post("region"); */
-			//redirect("welcome/region/$reg");
-			redirect('welcome/connexion'); // to be change after
+			if ($this->session->userdata('niveau') == 1) {//Admin  
+				
+				$this->session->set_flashdata('message', 'ajout_succed'); 
+				redirect('Welcome/home_admin');
+			}else {//initiateur
+				
+				$this->session->set_flashdata('message', 'ajout_succed');
+				/* $reg = $this->input->post("region"); */
+				//redirect("welcome/region/$reg");
+				redirect('welcome/connexion'); // to be change after
 
-		}else {
+		}
+	}else {
+
 			$this->session->set_flashdata('message', 'ajout_failed');
 			redirect('welcome/publier');
-		}
-	}
+		}	
+}
 
 	public function validerCommande($id, $nb){
 		$num = $this->session->userdata('user_num');
@@ -290,6 +298,9 @@ class Welcome extends CI_Controller {
 			'prom_cert' => $this->senmask->prom_cert(),
 			'regions' => $this->senmask->get("region"),
 			'departements' => $this->senmask->get("departement"),
+			'artisans' => $this->senmask->getAllArtisans(),
+			'commandes' => $this->senmask->getAllCommandes(),
+			'prom_non_Cert' => $this->senmask->getPromNonCert(),
 		);
 		$this->load->view('home_admin', $data);
 	}

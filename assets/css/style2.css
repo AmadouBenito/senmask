@@ -1,54 +1,66 @@
-
-.myslide{
+.myslide {
     width: 90%;
     height: 30%;
-    margin: 0,5%;
-    padding:0,5% ;
+    margin: 0, 5%;
+    padding: 0, 5%;
 }
-.imageSlide{
+
+.imageSlide {
     height: 400px;
-    width: 400px ;
+    width: 400px;
 }
-.myTable{
+
+.myTable {
     width: 90%;
-    margin : 5%,5% ;
-    padding :5%,5% ;
+    margin: 5%, 5%;
+    padding: 5%, 5%;
 }
-.myTableCards{
+
+.myTableCards {
     width: 100%;
 }
-#tab{
-    margin : 0,5% ; 
+
+#tab {
+    margin: 0, 5%;
 }
-.masque{
-    margin:1%;
+
+.masque {
+    margin: 1%;
 }
-#AddIcon{
+
+#imgAdmin {
+    margin: 5%, 5%;
+}
+
+#AddIcon {
     margin-top: 25%;
     margin-bottom: 25%;
 }
-#mask{
-    margin-left : 15%;
+
+#mask {
+    margin-left: 15%;
     margin-right: 15%;
-    width : 80% ;
+    width: 80%;
 }
-#masks{
-    margin-left : 15%;
+
+#masks {
+    margin-left: 15%;
     margin-right: 15%;
-    width : 80% ;
+    width: 80%;
 }
-.MyIcons{
+
+.MyIcons {
     width: 10%;
-    margin-left:45% ;
+    margin-left: 45%;
     margin-right: 45%;
 }
 
-.my_menu{
+.my_menu {
     width: 50%;
 }
 
-@media(max-width: 500px){
+@media(max-width: 500px) {
     .my_menu {
-    	width:100%;
+        width: 100%;
     }
 }

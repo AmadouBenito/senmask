@@ -9,10 +9,10 @@ if (!$this->session->userdata('logged_in')) {
     <!-- Navigation-->
     <?php $this->load->view('nav'); ?>
     <?php $this->load->view('header_admin'); ?>
-    <div class="container">
+
         <br>
-        <div class="card bg-light">
-            <h4 class="card-title mt-3 text-center">Liste des distributeurs </h4>
+        <div class="row container" style="width:50%; margin-left :25%; margin-right :25%;">
+           <!-- <h4 class="card-title mt-3 text-center">Liste des distributeurs </h4>
             <p class="divider-text"></p>
             <table class="table table-striped">
                 <thead>
@@ -75,15 +75,51 @@ if (!$this->session->userdata('logged_in')) {
                     <?php } ?>
 
                 </tbody>
-            </table>
+            </table>-->
+            
+                <div class="col-lg-6 col-md-6 col-sm-12 mb-1" style = "margin-top :2%; margin-bottom :2% ;">
+                    <a href="<?php echo base_url(); ?>index.php/Welcome/publier">
+                        <div  type="button" >
+                            <div class="shadow-lg">
+                                <img src="<?php echo base_url(); ?>assets/img/ajout.jpeg" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 mb-1" style = "margin-top :2%; margin-bottom :2% ;">
+                    <div  type="button" data-toggle="modal" data-target=".bd-example-modal-lg-certifier">
+                        <div class="shadow-lg">
+                            <img src="<?php echo base_url(); ?>assets/img/certifier.jpeg" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 mb-1" style = "margin-top :2%; margin-bottom :2% ;">
+                    <div type="button" data-toggle="modal" data-target=".bd-example-modal-lg-commandes">
+                        <div class="shadow-lg">
+                            <img src="<?php echo base_url(); ?>assets/img/commandes.jpeg" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 mb-1" style = "margin-top :2%; margin-bottom :2% ; ">
+                    <div type="button" data-toggle="modal" data-target=".bd-example-modal-lg-artisans">
+                        <div class="shadow-lg">
+                            <img src="<?php echo base_url(); ?>assets/img/artisans.jpeg" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                </div>
 
-        </div> <!-- card.// -->
-    </div>
+
+        </div>
+                                </br> <!-- card.// -->
     <!--container end.//-->
     <?php $this->load->view('footer'); ?>
 </body>
 <?php
 $this->load->view('certificats');
+$this->load->view('commandes',$data);
+$this->load->view('certifier',$data);
+$this->load->view('artisans',$data);
+
 ?>
 
 </html>

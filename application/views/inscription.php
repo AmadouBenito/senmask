@@ -1,12 +1,12 @@
 <?php 
-    if ($this->session->userdata('logged_in')) {
+   /* if ($this->session->userdata('logged_in')) {
         if ($this->session->userdata('niveau') == 1) {//Admin   
             redirect('Welcome/home_admin');
         }else {//initiateur
             $user = $this->session->userdata('user_num');
             redirect("Welcome/home_init/$user");
         }
-    }
+    }*/
     $this->load->view('head'); ?>
 
 <body id="page-top">

@@ -52,6 +52,25 @@
             }
         }*/
 
+        public function getAllArtisans(){
+            $this->db->select('*');
+            $this->db->from('initiative');
+            $query = $this->db->get();
+            return $query->result();
+        }
+
+        public function getPromNonCert(){
+            $q = $this->db->get_where('initiative',array('certificat !=' => NULL, 'archivé' => 0, 'certifié' => 0) );
+            return $q->result();
+        }
+
+        public function getAllCommandes(){
+            $this->db->select('*');
+            $this->db->from('commande');
+            $query = $this->db->get();
+            return $query->result();
+        }
+
         public function updateProfile($data){
             if($data['num_tel']){
 
